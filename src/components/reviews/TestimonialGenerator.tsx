@@ -1,0 +1,132 @@
+
+"use client";
+
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { generateTestimonial, type GenerateTestimonialInput } from '@/ai/flows/generate-testimonial';
+import { serviceOptionsForSelect, type ServiceId } from '@/data/services';
+import { useToast } from '@/hooks/use-toast';
+import { Sparkles, Loader2, Quote } from 'lucide-react';
+
+export function TestimonialGenerator() {
+  const [selectedService, setSelectedService] = useState<ServiceId | undefined>(undefined);
+  const [testimonial, setTestimonial] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { toast } = useToast();
+
+  const handleGenerateTestimonial = async () => {
+    if (!selectedService) {
+      toast({
+        title: "Selection Required",
+        description: "Please select a service to generate a testimonial.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+    setTestimonial(''); // Clear previous testimonial
+
+    try {
+      const input: GenerateTestimonialInput = { service: selectedService };
+      const result = await generateTestimonial(input);
+      if (result && result.testimonial) {
+        setTestimonial(result.testimonial);
+        toast({
+          title: "Testimonial Generated!",
+          description: "A new testimonial has been created.",
+        });
+      } else {
+        throw new Error("Failed to generate testimonial or empty response.");
+      }
+    } catch (error) {
+      console.error("Error generating testimonial:", error);
+      toast({
+        title: "Error",
+        description: `Failed to generate testimonial. ${(error as Error).message || ""}`,
+        variant: "destructive",
+      });
+      setTestimonial("Could not generate a testimonial at this time. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <Card className="w-full max-w-2xl mx-auto shadow-xl border">
+      <CardHeader>
+        <CardTitle className="flex items-center text-2xl">
+          <Sparkles className="h-6 w-6 mr-2 text-accent" />
+          AI Testimonial Generator
+        </CardTitle>
+        <CardDescription>
+          Select a service to generate a unique, AI-powered testimonial. This showcases our AI capabilities.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div>
+          <Label htmlFor="service-select" className="text-sm font-medium text-foreground">Select Service</Label>
+          <Select
+            value={selectedService}
+            onValueChange={(value) => setSelectedService(value as ServiceId)}
+          >
+            <SelectTrigger id="service-select" className="w-full mt-1">
+              <SelectValue placeholder="Choose a service..." />
+            </SelectTrigger>
+            <SelectContent>
+              {serviceOptionsForSelect.map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        <Button
+          onClick={handleGenerateTestimonial}
+          disabled={isLoading || !selectedService}
+          className="w-full bg-accent text-accent-foreground hover:bg-accent/90 transition-colors duration-300"
+        >
+          {isLoading ? (
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          ) : (
+            <Sparkles className="mr-2 h-4 w-4" />
+          )}
+          {isLoading ? 'Generating...' : 'Generate Testimonial'}
+        </Button>
+
+        {testimonial && (
+          <div className="mt-6 p-4 border border-primary/20 rounded-lg bg-primary/5 relative">
+             <Quote className="absolute top-2 left-2 h-8 w-8 text-primary/30 transform -translate-x-1 -translate-y-1" />
+            <p className="text-foreground italic leading-relaxed text-center pt-4">
+              "{testimonial}"
+            </p>
+            <Quote className="absolute bottom-2 right-2 h-8 w-8 text-primary/30 transform translate-x-1 translate-y-1 rotate-180" />
+          </div>
+        )}
+         {isLoading && !testimonial && (
+          <div className="mt-6 p-4 border border-dashed border-muted-foreground/30 rounded-lg bg-muted/50 text-center">
+            <Loader2 className="h-8 w-8 animate-spin text-primary mx-auto mb-2" />
+            <p className="text-muted-foreground">Generating your testimonial...</p>
+          </div>
+        )}
+      </CardContent>
+      <CardFooter>
+        <p className="text-xs text-muted-foreground text-center w-full">
+          Note: Testimonials are generated by AI for demonstration purposes.
+        </p>
+      </CardFooter>
+    </Card>
+  );
+}
