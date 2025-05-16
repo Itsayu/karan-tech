@@ -22,7 +22,7 @@ export default function AboutPage() {
         className="animated-gradient-bg"
       />
 
-      <section className="py-12 md:py-16 bg-secondary/50">
+      <section className="py-12 md:px-28 md:py-16 bg-secondary/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-12 items-center"> {/* Changed to grid-cols-1 */}
             {/* Image div removed */}
@@ -41,7 +41,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16">
+      <section className="py-12 md:px-28 md:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12">
             <Card className="shadow-lg interactive-transition hover:shadow-xl hover:scale-[1.02]">
@@ -72,7 +72,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 bg-secondary/50">
+      <section className="py-12 md:px-28 md:py-16 bg-secondary/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-foreground mb-10">Our Core Values</h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -96,7 +96,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16">
+      <section className="py-12 md:px-28 md:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-foreground mb-10 flex items-center justify-center">
             <Users className="h-8 w-8 mr-3 text-primary" /> Meet Our Team

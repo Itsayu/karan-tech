@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative py-20 md:py-32 lg:py-40 overflow-hidden">
+      <section className="relative py-20 md:py-32 md:px-28 lg:py-40 overflow-hidden">
         <div className="absolute inset-0 animated-gradient-bg z-0"></div>
         {/* Optional: Add a subtle background pattern or image here */}
         {/* <Image src="https://placehold.co/1920x1080.png" alt="Background" layout="fill" objectFit="cover" className="opacity-10 z-0" data-ai-hint="abstract technology" /> */}
@@ -40,7 +40,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-16 md:py-24 bg-secondary/50">
+      <section id="services" className="py-16 md:px-28 md:py-24 bg-secondary/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold tracking-tight text-center text-foreground sm:text-4xl">
             Our Core Services
@@ -59,7 +59,7 @@ export default function Home() {
       {/* Why Choose Us Section - REMOVED */}
       
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-primary/90 text-primary-foreground">
+      <section className="py-16 md:py-24 md:px-28 bg-primary/90 text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
             Ready to Transform Your Business?

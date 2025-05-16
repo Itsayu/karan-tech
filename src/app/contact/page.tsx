@@ -11,13 +11,13 @@ export default function ContactPage() {
         title="Get in Touch"
         description="We're here to help and answer any question you might have. We look forward to hearing from you!"
       />
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <div className="container mx-auto px-4 sm:px-6 md:px-28 py-12 md:py-16">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <div>
-            <h2 className="text-2xl font-semibold text-foreground mb-6">Send us a message</h2>
+            <h2 className="text-2xl font-semibold text-foreground mb-6 text-center">Send us a message</h2>
             <ContactForm />
           </div>
-          <div className="p-6 bg-secondary/30 rounded-lg shadow-md">
+          <div className="p-6 bg-secondary/30 rounded-lg shadow-md mt-[3.4rem]">
              {/* Image div removed */}
             <h2 className="text-2xl font-semibold text-foreground mb-6 mt-6 lg:mt-0">Contact Information</h2> {/* Added margin top for spacing */}
             <p className="text-muted-foreground mb-6">

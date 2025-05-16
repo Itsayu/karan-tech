@@ -13,7 +13,7 @@ export default function FaqPage() {
         title="Frequently Asked Questions"
         description="Find answers to common questions about our IT services and processes. If you don't find your answer here, feel free to contact us."
       />
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <div className="container mx-auto px-4 sm:px-6 md:px-28 py-12 md:py-16">
         <div className="grid md:grid-cols-3 gap-8 items-start">
           <div className="md:col-span-2">
             <FaqClient faqs={faqs} />

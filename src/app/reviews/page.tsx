@@ -40,7 +40,7 @@ export default function ReviewsPage() {
         title="Client Voices & AI Showcase"
         description="See what our clients say about us and experience our AI-powered testimonial generator."
       />
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 space-y-16">
+      <div className="container mx-auto px-4 sm:px-6 md:px-28 py-12 md:py-16 space-y-16">
         
         <section>
           <h2 className="text-3xl font-bold text-center text-foreground mb-10 flex items-center justify-center">
