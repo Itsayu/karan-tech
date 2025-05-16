@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import type { Service } from '@/data/services';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import Image from 'next/image';
+// import Image from 'next/image'; // Image component removed
 
 interface ServiceCardProps {
   service: Service;
@@ -13,17 +13,8 @@ export function ServiceCard({ service }: ServiceCardProps) {
   const IconComponent = service.icon;
   return (
     <Card className="group flex flex-col h-full overflow-hidden shadow-lg interactive-transition hover:shadow-2xl hover:scale-[1.02]">
-      <div className="relative w-full h-48 overflow-hidden">
-        <Image 
-          src={service.imagePlaceholder} 
-          alt={service.name} 
-          layout="fill" 
-          objectFit="cover"
-          data-ai-hint={service.imageHint}
-          className="interactive-transition group-hover:scale-110"
-        />
-      </div>
-      <CardHeader className="flex-shrink-0">
+      {/* Image placeholder div removed */}
+      <CardHeader className="flex-shrink-0 pt-6"> {/* Added pt-6 for spacing since image is gone */}
         <div className="flex items-center gap-3 mb-2">
           <IconComponent className="h-8 w-8 text-primary interactive-transition group-hover:text-accent" />
           <CardTitle className="text-xl font-semibold">{service.name}</CardTitle>

@@ -2,8 +2,8 @@
 import { PageHeader } from '@/components/shared/PageHeader';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { coreValues } from '@/data/services';
-import Image from 'next/image';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+// import Image from 'next/image'; // Image component removed from "Who We Are"
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'; // AvatarImage will be conditionally removed or handled
 import { Users, Zap, Target, Eye } from 'lucide-react';
 
 const teamMembers = [
@@ -24,16 +24,8 @@ export default function AboutPage() {
 
       <section className="py-12 md:py-16 bg-secondary/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl interactive-transition hover:scale-105 hover:shadow-2xl">
-              <Image
-                src="https://placehold.co/800x600.png"
-                alt="Karan Techno office"
-                layout="fill"
-                objectFit="cover"
-                data-ai-hint="modern office"
-              />
-            </div>
+          <div className="grid grid-cols-1 gap-12 items-center"> {/* Changed to grid-cols-1 */}
+            {/* Image div removed */}
             <div>
               <h2 className="text-2xl font-semibold text-foreground mb-4 flex items-center">
                 <Zap className="h-7 w-7 mr-2 text-primary" /> Who We Are
@@ -113,7 +105,7 @@ export default function AboutPage() {
             {teamMembers.map((member) => (
               <Card key={member.name} className="text-center shadow-md p-6 interactive-transition hover:shadow-xl hover:scale-105">
                 <Avatar className="w-24 h-24 mx-auto mb-4 border-2 border-primary interactive-transition group-hover:border-accent">
-                  <AvatarImage src={member.avatar} alt={member.name} data-ai-hint={member.hint} />
+                  {/* <AvatarImage src={member.avatar} alt={member.name} data-ai-hint={member.hint} /> */} {/* AvatarImage removed */}
                   <AvatarFallback>{member.name.substring(0, 2).toUpperCase()}</AvatarFallback>
                 </Avatar>
                 <h3 className="text-lg font-semibold text-foreground">{member.name}</h3>

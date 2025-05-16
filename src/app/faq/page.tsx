@@ -2,7 +2,7 @@
 import { PageHeader } from '@/components/shared/PageHeader';
 import { FaqClient } from '@/components/faq/FaqClient';
 import { faqs } from '@/data/faq';
-import Image from 'next/image';
+// import Image from 'next/image'; // Image component removed
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
@@ -19,17 +19,8 @@ export default function FaqPage() {
             <FaqClient faqs={faqs} />
           </div>
           <div className="md:col-span-1 p-6 bg-secondary/30 rounded-lg shadow-md group">
-            <div className="relative w-full h-48 mb-4 rounded-md overflow-hidden shadow-lg interactive-transition group-hover:scale-105">
-              <Image 
-                src="https://placehold.co/400x300.png" 
-                alt="Support illustration"
-                layout="fill"
-                objectFit="cover"
-                data-ai-hint="support helpdesk"
-                className="interactive-transition group-hover:scale-110"
-              />
-            </div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">Still have questions?</h3>
+            {/* Image div removed */}
+            <h3 className="text-xl font-semibold text-foreground mb-2 mt-4 md:mt-0">Still have questions?</h3> {/* Added margin top */}
             <p className="text-muted-foreground text-sm mb-4">
               If you can't find the answer you're looking for, please don't hesitate to reach out to our support team.
             </p>

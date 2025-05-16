@@ -1,10 +1,12 @@
 
 import { Button } from '@/components/ui/button';
 import { ServiceCard } from '@/components/services/ServiceCard';
-import { services, coreValues } from '@/data/services';
+import { services } from '@/data/services';
 import Link from 'next/link';
-import Image from 'next/image';
-import { CheckCircle } from 'lucide-react';
+// Removed coreValues import as the section using it is removed
+// import { coreValues } from '@/data/services';
+// import Image from 'next/image'; // Removed as Image component is no longer used
+// import { CheckCircle } from 'lucide-react'; // Removed as CheckCircle is no longer used here
 
 export default function Home() {
   return (
@@ -54,46 +56,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
-            <div>
-              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                Why Partner with <span className="text-primary">Karan Techno?</span>
-              </h2>
-              <p className="mt-4 text-lg text-muted-foreground">
-                We are dedicated to providing innovative solutions and exceptional service to help your business thrive in the digital landscape.
-              </p>
-              <ul className="mt-8 space-y-4">
-                {coreValues.map((value) => {
-                  const Icon = value.icon;
-                  return (
-                    <li key={value.title} className="flex items-start p-3 rounded-lg interactive-transition hover:bg-secondary/70 hover:shadow-md">
-                      <div className="flex-shrink-0 p-2 bg-primary/10 rounded-full">
-                        <Icon className="h-6 w-6 text-primary" />
-                      </div>
-                      <div className="ml-4">
-                        <h3 className="text-lg font-medium text-foreground">{value.title}</h3>
-                        <p className="mt-1 text-sm text-muted-foreground">{value.description}</p>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-            <div className="mt-10 lg:mt-0 relative aspect-video rounded-lg overflow-hidden shadow-xl interactive-transition hover:scale-105 hover:shadow-2xl">
-              <Image 
-                src="https://placehold.co/800x600.png" 
-                alt="Team working" 
-                layout="fill" 
-                objectFit="cover"
-                data-ai-hint="team collaboration"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Why Choose Us Section - REMOVED */}
       
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-primary/90 text-primary-foreground">

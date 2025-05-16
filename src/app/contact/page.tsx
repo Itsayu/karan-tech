@@ -2,7 +2,7 @@
 import { PageHeader } from '@/components/shared/PageHeader';
 import { ContactForm } from '@/components/contact/ContactForm';
 import { Mail, Phone, MapPin } from 'lucide-react';
-import Image from 'next/image';
+// import Image from 'next/image'; // Image component removed
 
 export default function ContactPage() {
   return (
@@ -18,17 +18,8 @@ export default function ContactPage() {
             <ContactForm />
           </div>
           <div className="p-6 bg-secondary/30 rounded-lg shadow-md">
-             <div className="relative w-full h-64 mb-6 rounded-md overflow-hidden shadow-lg interactive-transition hover:scale-105">
-              <Image 
-                src="https://placehold.co/600x400.png" 
-                alt="Contact us illustration"
-                layout="fill"
-                objectFit="cover"
-                data-ai-hint="communication technology"
-                className="interactive-transition group-hover:scale-110"
-              />
-            </div>
-            <h2 className="text-2xl font-semibold text-foreground mb-6">Contact Information</h2>
+             {/* Image div removed */}
+            <h2 className="text-2xl font-semibold text-foreground mb-6 mt-6 lg:mt-0">Contact Information</h2> {/* Added margin top for spacing */}
             <p className="text-muted-foreground mb-6">
               Alternatively, you can reach us through the following channels. Our team is available to assist you during business hours.
             </p>

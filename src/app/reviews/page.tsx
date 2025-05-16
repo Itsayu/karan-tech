@@ -3,8 +3,8 @@ import { PageHeader } from '@/components/shared/PageHeader';
 import { TestimonialGenerator } from '@/components/reviews/TestimonialGenerator';
 import { Star } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Image from 'next/image';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+// import Image from 'next/image'; // Not used directly on this page
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'; // AvatarImage will be handled
 
 
 // Sample manual testimonials
@@ -13,7 +13,7 @@ const manualTestimonials = [
     quote: "Karan Techno transformed our online presence with a stunning website and effective SEO. Our traffic has skyrocketed!",
     author: "Sunita Sharma",
     company: "Blossom Boutique",
-    avatar: "https://placehold.co/100x100.png",
+    avatar: "https://placehold.co/100x100.png", // Kept for data consistency, but AvatarImage will be removed
     hint: "smiling woman"
   },
   {
@@ -52,12 +52,12 @@ export default function ReviewsPage() {
                 <CardHeader className="flex-shrink-0">
                   <div className="flex items-center space-x-3">
                     <Avatar className="w-12 h-12 border-2 border-primary/50 group-hover:border-accent">
-                        <AvatarImage 
+                        {/* <AvatarImage 
                           src={testimonial.avatar} 
                           alt={testimonial.author} 
                           data-ai-hint={testimonial.hint}
-                        />
-                        <AvatarFallback>{testimonial.author.substring(0,1)}</AvatarFallback>
+                        /> */} {/* AvatarImage removed */}
+                        <AvatarFallback>{testimonial.author.substring(0,1).toUpperCase()}</AvatarFallback>
                     </Avatar>
                     <div>
                       <CardTitle className="text-lg font-semibold">{testimonial.author}</CardTitle>
