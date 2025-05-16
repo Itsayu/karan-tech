@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'; //
 import { Users, Zap, Target, Eye } from 'lucide-react';
 
 const teamMembers = [
-  { name: 'Karan Sharma', role: 'Founder & CEO', avatar: 'https://placehold.co/200x200.png', hint: "professional headshot" },
+  { name: 'Gyanendra Pratap Chauhan', role: 'Founder & CEO', avatar: 'https://placehold.co/200x200.png', hint: "professional headshot" },
   { name: 'Priya Singh', role: 'Lead Developer', avatar: 'https://placehold.co/200x200.png', hint: "developer coding" },
   { name: 'Raj Patel', role: 'UX Design Lead', avatar: 'https://placehold.co/200x200.png', hint: "designer smiling" },
   { name: 'Aisha Khan', role: 'Marketing Strategist', avatar: 'https://placehold.co/200x200.png', hint: "marketer presenting" },
