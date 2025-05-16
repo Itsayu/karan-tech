@@ -13,10 +13,10 @@ export default function ServicesPage() {
       <PageHeader
         title="Our Comprehensive IT Solutions"
         description="Discover how Karan Techno can elevate your business with our expert services, tailored to meet your unique needs and drive success."
-        className="animated-gradient-bg"
+        className="animated-gradient-bg md:px-28"
       />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <div className="container mx-auto px-4 sm:px-6 md:px-28 py-12 md:py-16">
         <div className="space-y-16">
           {services.map((service: ServiceType, index: number) => {
             const IconComponent = service.icon;
