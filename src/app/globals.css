@@ -108,6 +108,25 @@
   }
 }
 
+@layer utilities {
+  .interactive-transition {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .animated-gradient-bg {
+    background: linear-gradient(-45deg, hsl(var(--primary)/.2), hsl(var(--accent)/.1), hsl(var(--secondary)/.2), hsl(var(--primary)/.1));
+    background-size: 400% 400%;
+    animation: gradientBG 20s ease infinite;
+  }
+
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+}
+
+
 /* Custom scrollbar for better aesthetics */
 ::-webkit-scrollbar {
   width: 8px;

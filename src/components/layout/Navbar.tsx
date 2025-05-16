@@ -25,7 +25,7 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-2 text-lg font-bold text-primary hover:text-primary/90 transition-colors">
+        <Link href="/" className="flex items-center gap-2 text-lg font-bold text-primary hover:text-primary/90 interactive-transition">
           <Zap className="h-6 w-6" />
           Karan Techno
         </Link>
@@ -36,7 +36,7 @@ export function Navbar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
+                "text-sm font-medium interactive-transition hover:text-primary",
                 pathname === item.href ? "text-primary" : "text-foreground/80"
               )}
             >
@@ -55,7 +55,7 @@ export function Navbar() {
             </SheetTrigger>
             <SheetContent side="right" className="w-full max-w-xs bg-background p-6">
               <div className="flex flex-col space-y-6">
-                <Link href="/" className="flex items-center gap-2 text-lg font-bold text-primary" onClick={() => setIsMobileMenuOpen(false)}>
+                <Link href="/" className="flex items-center gap-2 text-lg font-bold text-primary interactive-transition" onClick={() => setIsMobileMenuOpen(false)}>
                   <Zap className="h-6 w-6" />
                   Karan Techno
                 </Link>
@@ -65,7 +65,7 @@ export function Navbar() {
                        <Link                         
                         href={item.href}
                         className={cn(
-                          "text-base font-medium transition-colors hover:text-primary",
+                          "text-base font-medium interactive-transition hover:text-primary",
                           pathname === item.href ? "text-primary" : "text-foreground/80"
                         )}
                         onClick={() => setIsMobileMenuOpen(false)}
@@ -76,7 +76,7 @@ export function Navbar() {
                   ))}
                 </nav>
                 <SheetClose asChild>
-                  <Button variant="outline" className="w-full" onClick={() => setIsMobileMenuOpen(false)}>Close</Button>
+                  <Button variant="outline" className="w-full interactive-transition" onClick={() => setIsMobileMenuOpen(false)}>Close</Button>
                 </SheetClose>
               </div>
             </SheetContent>

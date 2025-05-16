@@ -10,11 +10,11 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative py-20 md:py-32 lg:py-40 bg-gradient-to-br from-primary/10 via-background to-background">
-        <div className="absolute inset-0 opacity-50">
-            {/* Optional: Add a subtle background pattern or image here */}
-            {/* <Image src="https://picsum.photos/1920/1080" alt="Background" layout="fill" objectFit="cover" className="opacity-20" /> */}
-        </div>
+      <section className="relative py-20 md:py-32 lg:py-40 overflow-hidden">
+        <div className="absolute inset-0 animated-gradient-bg z-0"></div>
+        {/* Optional: Add a subtle background pattern or image here */}
+        {/* <Image src="https://placehold.co/1920x1080.png" alt="Background" layout="fill" objectFit="cover" className="opacity-10 z-0" data-ai-hint="abstract technology" /> */}
+        
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
             Empowering Your <span className="text-primary">Digital Future</span>
@@ -24,12 +24,12 @@ export default function Home() {
           </p>
           <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
             <Link href="/services" passHref>
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 transition-transform transform hover:scale-105 w-full sm:w-auto">
+              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 interactive-transition transform hover:scale-105 w-full sm:w-auto">
                 Explore Our Services
               </Button>
             </Link>
             <Link href="/contact" passHref>
-              <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary/10 transition-transform transform hover:scale-105 w-full sm:w-auto">
+              <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary/10 interactive-transition transform hover:scale-105 w-full sm:w-auto">
                 Get a Free Quote
               </Button>
             </Link>
@@ -69,11 +69,11 @@ export default function Home() {
                 {coreValues.map((value) => {
                   const Icon = value.icon;
                   return (
-                    <li key={value.title} className="flex items-start">
-                      <div className="flex-shrink-0">
+                    <li key={value.title} className="flex items-start p-3 rounded-lg interactive-transition hover:bg-secondary/70 hover:shadow-md">
+                      <div className="flex-shrink-0 p-2 bg-primary/10 rounded-full">
                         <Icon className="h-6 w-6 text-primary" />
                       </div>
-                      <div className="ml-3">
+                      <div className="ml-4">
                         <h3 className="text-lg font-medium text-foreground">{value.title}</h3>
                         <p className="mt-1 text-sm text-muted-foreground">{value.description}</p>
                       </div>
@@ -82,9 +82,9 @@ export default function Home() {
                 })}
               </ul>
             </div>
-            <div className="mt-10 lg:mt-0 relative aspect-video rounded-lg overflow-hidden shadow-xl">
+            <div className="mt-10 lg:mt-0 relative aspect-video rounded-lg overflow-hidden shadow-xl interactive-transition hover:scale-105 hover:shadow-2xl">
               <Image 
-                src="https://picsum.photos/800/600?random=5" 
+                src="https://placehold.co/800x600.png" 
                 alt="Team working" 
                 layout="fill" 
                 objectFit="cover"
@@ -109,7 +109,7 @@ export default function Home() {
               <Button
                 size="lg"
                 variant="default"
-                className="bg-accent text-accent-foreground hover:bg-accent/90 transition-transform transform hover:scale-105 shadow-lg"
+                className="bg-accent text-accent-foreground hover:bg-accent/90 interactive-transition transform hover:scale-105 shadow-lg"
               >
                 Request a Consultation
               </Button>

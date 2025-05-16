@@ -3,6 +3,8 @@ import { PageHeader } from '@/components/shared/PageHeader';
 import { FaqClient } from '@/components/faq/FaqClient';
 import { faqs } from '@/data/faq';
 import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function FaqPage() {
   return (
@@ -16,23 +18,26 @@ export default function FaqPage() {
           <div className="md:col-span-2">
             <FaqClient faqs={faqs} />
           </div>
-          <div className="md:col-span-1 p-6 bg-secondary/30 rounded-lg shadow-md">
-            <div className="relative w-full h-48 mb-4 rounded-md overflow-hidden">
+          <div className="md:col-span-1 p-6 bg-secondary/30 rounded-lg shadow-md group">
+            <div className="relative w-full h-48 mb-4 rounded-md overflow-hidden shadow-lg interactive-transition group-hover:scale-105">
               <Image 
-                src="https://picsum.photos/400/300?random=7" 
+                src="https://placehold.co/400x300.png" 
                 alt="Support illustration"
                 layout="fill"
                 objectFit="cover"
                 data-ai-hint="support helpdesk"
+                className="interactive-transition group-hover:scale-110"
               />
             </div>
             <h3 className="text-xl font-semibold text-foreground mb-2">Still have questions?</h3>
             <p className="text-muted-foreground text-sm mb-4">
               If you can't find the answer you're looking for, please don't hesitate to reach out to our support team.
             </p>
-            <a href="/contact" className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-primary-foreground bg-primary hover:bg-primary/90 transition-colors">
-              Contact Us
-            </a>
+            <Link href="/contact" passHref>
+                <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 interactive-transition transform hover:scale-105">
+                    Contact Us
+                </Button>
+            </Link>
           </div>
         </div>
       </div>

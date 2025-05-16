@@ -31,7 +31,7 @@ export const services: Service[] = [
       "Website Performance Optimization & SEO-Friendly Architecture",
       "Ongoing Maintenance & Support"
     ],
-    imagePlaceholder: "https://picsum.photos/600/400?random=1",
+    imagePlaceholder: "https://placehold.co/600x400.png",
     imageHint: "web design"
   },
   {
@@ -48,7 +48,7 @@ export const services: Service[] = [
       "Local SEO for Geo-Targeted Businesses",
       "Technical SEO & Performance Monitoring"
     ],
-    imagePlaceholder: "https://picsum.photos/600/400?random=2",
+    imagePlaceholder: "https://placehold.co/600x400.png",
     imageHint: "analytics chart"
   },
   {
@@ -65,7 +65,7 @@ export const services: Service[] = [
       "App Store Submission & Optimization",
       "Post-Launch Support & Updates"
     ],
-    imagePlaceholder: "https://picsum.photos/600/400?random=3",
+    imagePlaceholder: "https://placehold.co/600x400.png",
     imageHint: "mobile app"
   },
   {
@@ -82,7 +82,7 @@ export const services: Service[] = [
       "Usability Testing & Feedback Analysis",
       "Design System Creation & Branding"
     ],
-    imagePlaceholder: "https://picsum.photos/600/400?random=4",
+    imagePlaceholder: "https://placehold.co/600x400.png",
     imageHint: "design tools"
   },
 ];
@@ -107,4 +107,3 @@ export const coreValues = [
     description: "We are committed to the highest standards of quality and professionalism in all our projects.",
   },
 ];
-

@@ -4,13 +4,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { coreValues } from '@/data/services';
 import Image from 'next/image';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Users, Zap, Target, Eye, CheckCircle } from 'lucide-react';
+import { Users, Zap, Target, Eye } from 'lucide-react';
 
 const teamMembers = [
-  { name: 'Karan Sharma', role: 'Founder & CEO', avatar: 'https://picsum.photos/200/200?random=10', hint: "professional headshot" },
-  { name: 'Priya Singh', role: 'Lead Developer', avatar: 'https://picsum.photos/200/200?random=11', hint: "developer coding" },
-  { name: 'Raj Patel', role: 'UX Design Lead', avatar: 'https://picsum.photos/200/200?random=12', hint: "designer smiling" },
-  { name: 'Aisha Khan', role: 'Marketing Strategist', avatar: 'https://picsum.photos/200/200?random=13', hint: "marketer presenting" },
+  { name: 'Karan Sharma', role: 'Founder & CEO', avatar: 'https://placehold.co/200x200.png', hint: "professional headshot" },
+  { name: 'Priya Singh', role: 'Lead Developer', avatar: 'https://placehold.co/200x200.png', hint: "developer coding" },
+  { name: 'Raj Patel', role: 'UX Design Lead', avatar: 'https://placehold.co/200x200.png', hint: "designer smiling" },
+  { name: 'Aisha Khan', role: 'Marketing Strategist', avatar: 'https://placehold.co/200x200.png', hint: "marketer presenting" },
 ];
 
 export default function AboutPage() {
@@ -19,14 +19,15 @@ export default function AboutPage() {
       <PageHeader
         title="About Karan Techno"
         description="Driving innovation and digital transformation for businesses worldwide."
+        className="animated-gradient-bg"
       />
 
       <section className="py-12 md:py-16 bg-secondary/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
+            <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl interactive-transition hover:scale-105 hover:shadow-2xl">
               <Image
-                src="https://picsum.photos/800/600?random=6"
+                src="https://placehold.co/800x600.png"
                 alt="Karan Techno office"
                 layout="fill"
                 objectFit="cover"
@@ -51,7 +52,7 @@ export default function AboutPage() {
       <section className="py-12 md:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12">
-            <Card className="shadow-lg">
+            <Card className="shadow-lg interactive-transition hover:shadow-xl hover:scale-[1.02]">
               <CardHeader>
                 <CardTitle className="flex items-center text-xl font-semibold">
                   <Target className="h-6 w-6 mr-2 text-primary" /> Our Mission
@@ -63,7 +64,7 @@ export default function AboutPage() {
                 </p>
               </CardContent>
             </Card>
-            <Card className="shadow-lg">
+            <Card className="shadow-lg interactive-transition hover:shadow-xl hover:scale-[1.02]">
               <CardHeader>
                 <CardTitle className="flex items-center text-xl font-semibold">
                   <Eye className="h-6 w-6 mr-2 text-primary" /> Our Vision
@@ -86,10 +87,10 @@ export default function AboutPage() {
             {coreValues.map((value) => {
               const Icon = value.icon;
               return (
-                <Card key={value.title} className="text-center shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <Card key={value.title} className="text-center shadow-lg interactive-transition hover:shadow-xl hover:scale-[1.03] transition-shadow duration-300">
                   <CardHeader>
-                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground mb-4">
-                      <Icon className="h-6 w-6" />
+                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground mb-4 interactive-transition group-hover:bg-accent">
+                      <Icon className="h-6 w-6 interactive-transition group-hover:scale-110" />
                     </div>
                     <CardTitle className="text-xl font-semibold">{value.title}</CardTitle>
                   </CardHeader>
@@ -106,12 +107,12 @@ export default function AboutPage() {
       <section className="py-12 md:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-foreground mb-10 flex items-center justify-center">
-            <Users className="h-8 w-8 mr-3 text-primary" /> Meet Our Team (Placeholder)
+            <Users className="h-8 w-8 mr-3 text-primary" /> Meet Our Team
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {teamMembers.map((member) => (
-              <Card key={member.name} className="text-center shadow-md p-6">
-                <Avatar className="w-24 h-24 mx-auto mb-4 border-2 border-primary">
+              <Card key={member.name} className="text-center shadow-md p-6 interactive-transition hover:shadow-xl hover:scale-105">
+                <Avatar className="w-24 h-24 mx-auto mb-4 border-2 border-primary interactive-transition group-hover:border-accent">
                   <AvatarImage src={member.avatar} alt={member.name} data-ai-hint={member.hint} />
                   <AvatarFallback>{member.name.substring(0, 2).toUpperCase()}</AvatarFallback>
                 </Avatar>
