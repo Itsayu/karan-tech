@@ -27,19 +27,13 @@ export default function ContactPage() {
               <li className="flex items-center group">
                 <Mail className="h-5 w-5 text-primary mr-3 flex-shrink-0 interactive-transition group-hover:text-accent" />
                 <a href="mailto:info@karantechno.com" className="text-muted-foreground interactive-transition hover:text-primary group-hover:text-accent">
-                  info@karantechno.com
-                </a>
-              </li>
-              <li className="flex items-center group">
-                <Phone className="h-5 w-5 text-primary mr-3 flex-shrink-0 interactive-transition group-hover:text-accent" />
-                <a href="tel:+1234567890" className="text-muted-foreground interactive-transition hover:text-primary group-hover:text-accent">
-                  +1 (234) 567-890 (Placeholder)
+                  kchauhan726@gmail.com
                 </a>
               </li>
               <li className="flex items-start group">
                 <MapPin className="h-5 w-5 text-primary mr-3 mt-1 flex-shrink-0 interactive-transition group-hover:text-accent" />
                 <span className="text-muted-foreground interactive-transition group-hover:text-foreground">
-                  123 Tech Avenue, Innovation City, CA 90210 (Placeholder)
+                  GG15, Casa Homes, Sector 115, Mohali, Punjab - 140307
                 </span>
               </li>
             </ul>
