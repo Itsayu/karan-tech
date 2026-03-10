@@ -12,7 +12,7 @@ export default function HomePage() {
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="relative pt-20 pb-12 md:pt-32 md:pb-20 bg-secondary/30">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
             <div className="text-center md:text-left">
               <Badge
                 variant="outline"
@@ -61,8 +61,8 @@ export default function HomePage() {
         </section>
 
         {/* Services Section */}
-        <section id="services" className="py-16 md:px-28 md:py-24 bg-background">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="services" className="py-16 md:py-24 bg-background">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl drop-shadow-md">
                 Our Core Services

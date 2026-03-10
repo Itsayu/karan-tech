@@ -11,7 +11,7 @@ export default function ContactPage() {
         title="Get in Touch"
         description="We're here to help and answer any question you might have. We look forward to hearing from you!"
       />
-      <div className="container mx-auto px-4 sm:px-6 md:px-28 py-12 md:py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-20">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           <div className="bg-background p-8 rounded-2xl shadow-2xl">
             <h2 className="text-3xl font-bold text-foreground mb-6 text-center">Send us a message</h2>
