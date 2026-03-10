@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import type { Service } from '@/data/services';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-// import Image from 'next/image'; // Image component removed
 
 interface ServiceCardProps {
   service: Service;
@@ -12,20 +11,19 @@ interface ServiceCardProps {
 export function ServiceCard({ service }: ServiceCardProps) {
   const IconComponent = service.icon;
   return (
-    <Card className="group flex flex-col h-full overflow-hidden shadow-lg interactive-transition hover:shadow-2xl hover:scale-[1.02]">
-      {/* Image placeholder div removed */}
-      <CardHeader className="flex-shrink-0 pt-6"> {/* Added pt-6 for spacing since image is gone */}
-        <div className="flex items-center gap-3 mb-2">
-          <IconComponent className="h-8 w-8 text-primary interactive-transition group-hover:text-accent" />
-          <CardTitle className="text-xl font-semibold">{service.name}</CardTitle>
+    <Card className="group flex flex-col h-full overflow-hidden shadow-lg transition-all duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-2 border-b-4 border-transparent hover:border-primary">
+      <CardHeader className="flex-shrink-0 pt-8 text-center">
+        <div className="flex justify-center mb-4">
+          <IconComponent className="h-12 w-12 text-primary transition-transform duration-300 group-hover:scale-125 group-hover:rotate-6" />
         </div>
-        <CardDescription className="text-sm text-muted-foreground min-h-[3em] line-clamp-2">
+        <CardTitle className="text-xl font-bold">{service.name}</CardTitle>
+      </CardHeader>
+      <CardContent className="flex-grow flex flex-col justify-between text-center">
+        <CardDescription className="text-muted-foreground mb-6">
           {service.shortDescription}
         </CardDescription>
-      </CardHeader>
-      <CardContent className="flex-grow flex flex-col justify-end">
         <Link href={`/services#${service.id.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} passHref>
-          <Button variant="outline" className="w-full mt-auto interactive-transition border-primary/50 text-primary hover:bg-accent hover:text-accent-foreground hover:border-accent">
+          <Button variant="ghost" className="w-full mt-auto text-primary hover:bg-primary/10 hover:text-primary font-semibold">
             Learn More
           </Button>
         </Link>
