@@ -8,10 +8,10 @@ import { Users, Zap, Target, Eye } from 'lucide-react';
 
 const teamMembers = [
   { 
-    name: 'Karan Sharma', 
+    name: 'Gyanendra Pratap Chauhan', 
     role: 'Founder & CEO', 
-    avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    hint: "professional headshot of the CEO, Karan Sharma"
+    avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    hint: "professional headshot of the CEO"
   },
   { 
     name: 'Aisha Khan', 
@@ -41,8 +41,8 @@ export default function AboutPage() {
         description="Driving innovation and digital transformation for businesses across India."
       />
 
-      <section className="py-12 md:px-28 md:py-20 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 md:py-20 bg-background">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="relative w-full h-80 md:h-96 rounded-2xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-500">
                 <Image 
@@ -67,8 +67,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-12 md:px-28 md:py-20 bg-secondary/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 md:py-20 bg-secondary/30">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12">
             <Card className="shadow-lg border-l-4 border-primary bg-background transform hover:-translate-y-2 transition-transform duration-300">
               <CardHeader>
@@ -98,8 +98,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-12 md:px-28 md:py-20 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 md:py-20 bg-background">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-foreground mb-12">Our Core Values</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {coreValues.map((value) => {
@@ -122,8 +122,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-12 md:px-28 md:py-20 bg-secondary/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 md:py-20 bg-secondary/30">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-foreground mb-12 flex items-center justify-center">
             <Users className="h-8 w-8 mr-3 text-primary" /> Meet Our Leadership
           </h2>
