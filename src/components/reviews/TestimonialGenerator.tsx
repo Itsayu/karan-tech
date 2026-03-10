@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from 'react';
@@ -12,120 +11,161 @@ import {
 } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { generateTestimonial, type GenerateTestimonialInput } from '@/ai/flows/generate-testimonial';
 import { serviceOptionsForSelect, type ServiceId } from '@/data/services';
 import { useToast } from '@/hooks/use-toast';
-import { Sparkles, Loader2, Quote } from 'lucide-react';
+import { Sparkles, Loader2, Quote, Copy, Check, RefreshCw } from 'lucide-react';
 
 export function TestimonialGenerator() {
   const [selectedService, setSelectedService] = useState<ServiceId | undefined>(undefined);
   const [testimonial, setTestimonial] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [copied, setCopied] = useState(false);
   const { toast } = useToast();
 
   const handleGenerateTestimonial = async () => {
-    if (!selectedService) {
-      toast({
-        title: "Selection Required",
-        description: "Please select a service to generate a testimonial.",
-        variant: "destructive",
-      });
-      return;
-    }
+    if (!selectedService) return;
 
     setIsLoading(true);
-    setTestimonial(''); // Clear previous testimonial
+    setCopied(false);
 
     try {
       const input: GenerateTestimonialInput = { service: selectedService };
       const result = await generateTestimonial(input);
-      if (result && result.testimonial) {
+      if (result?.testimonial) {
         setTestimonial(result.testimonial);
-        toast({
-          title: "Testimonial Generated!",
-          description: "A new testimonial has been created.",
-        });
       } else {
-        throw new Error("Failed to generate testimonial or empty response.");
+        throw new Error("Empty response from AI.");
       }
     } catch (error) {
-      console.error("Error generating testimonial:", error);
       toast({
-        title: "Error",
-        description: `Failed to generate testimonial. ${(error as Error).message || ""}`,
+        title: "Generation Failed",
+        description: "The AI is taking a break. Please try again in a moment.",
         variant: "destructive",
       });
-      setTestimonial("Could not generate a testimonial at this time. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
 
+  const copyToClipboard = () => {
+    if (!testimonial) return;
+    navigator.clipboard.writeText(testimonial);
+    setCopied(true);
+    toast({ title: "Copied!", description: "Testimonial saved to clipboard." });
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
-    <Card className="w-full max-w-2xl mx-auto shadow-xl border">
-      <CardHeader>
-        <CardTitle className="flex items-center text-2xl">
-          <Sparkles className="h-6 w-6 mr-2 text-accent" />
-          AI Testimonial Generator
-        </CardTitle>
-        <CardDescription>
-          Select a service to generate a unique, AI-powered testimonial. This showcases our AI capabilities.
-        </CardDescription>
+    <Card className="w-full max-w-2xl mx-auto overflow-hidden border-t-4 border-t-primary shadow-2xl">
+      <CardHeader className="bg-muted/30 pb-8">
+        <div className="flex justify-between items-start">
+          <div className="space-y-1">
+            <CardTitle className="text-3xl font-bold tracking-tight flex items-center gap-2">
+              <Sparkles className="h-6 w-6 text-primary animate-pulse" />
+              Testimonial Engine
+            </CardTitle>
+            <CardDescription className="text-base">
+              Craft compelling social proof in seconds using specialized AI.
+            </CardDescription>
+          </div>
+        </div>
       </CardHeader>
-      <CardContent className="space-y-6">
-        <div>
-          <Label htmlFor="service-select" className="text-sm font-medium text-foreground">Select Service</Label>
-          <Select
-            value={selectedService}
-            onValueChange={(value) => setSelectedService(value as ServiceId)}
+
+      <CardContent className="space-y-8 pt-8">
+        {/* Input Section */}
+        <div className="grid gap-4">
+          <div className="space-y-2">
+            <Label htmlFor="service-select" className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              What service did they use?
+            </Label>
+            <Select
+              value={selectedService}
+              onValueChange={(value) => setSelectedService(value as ServiceId)}
+            >
+              <SelectTrigger id="service-select" className="h-12 text-md focus:ring-2 ring-primary/20">
+                <SelectValue placeholder="Choose a service category..." />
+              </SelectTrigger>
+              <SelectContent>
+                {serviceOptionsForSelect.map((option) => (
+                  <SelectItem key={option.value} value={option.value} className="py-3">
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <Button
+            onClick={handleGenerateTestimonial}
+            disabled={isLoading || !selectedService}
+            size="lg"
+            className="w-full font-bold shadow-lg shadow-primary/20 transition-all hover:scale-[1.01] active:scale-[0.98]"
           >
-            <SelectTrigger id="service-select" className="w-full mt-1">
-              <SelectValue placeholder="Choose a service..." />
-            </SelectTrigger>
-            <SelectContent>
-              {serviceOptionsForSelect.map((option) => (
-                <SelectItem key={option.value} value={option.value}>
-                  {option.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                Engineering Magic...
+              </>
+            ) : testimonial ? (
+              <>
+                <RefreshCw className="mr-2 h-5 w-5" />
+                Regenerate Version
+              </>
+            ) : (
+              <>
+                <Sparkles className="mr-2 h-5 w-5" />
+                Generate Testimonial
+              </>
+            )}
+          </Button>
         </div>
 
-        <Button
-          onClick={handleGenerateTestimonial}
-          disabled={isLoading || !selectedService}
-          className="w-full bg-accent text-accent-foreground hover:bg-accent/90 transition-colors duration-300"
-        >
-          {isLoading ? (
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+        {/* Output Section */}
+        <div className="relative group">
+          {isLoading && !testimonial ? (
+            <div className="h-40 flex flex-col items-center justify-center border-2 border-dashed rounded-xl bg-muted/20 animate-in fade-in zoom-in duration-300">
+              <Loader2 className="h-10 w-10 animate-spin text-primary/40 mb-3" />
+              <p className="text-sm text-muted-foreground font-medium">Analyzing service benefits...</p>
+            </div>
+          ) : testimonial ? (
+            <div className="relative animate-in slide-in-from-bottom-4 duration-500">
+              <div className="absolute -top-3 -left-3">
+                <Quote className="h-10 w-10 text-primary/10 fill-primary/10" />
+              </div>
+              
+              <div className="p-8 rounded-xl border bg-gradient-to-br from-background to-muted/30 shadow-inner relative overflow-hidden">
+                <p className="text-lg md:text-xl font-medium italic leading-relaxed text-foreground relative z-10">
+                  {testimonial}
+                </p>
+                
+                <div className="flex justify-end mt-6 gap-2">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={copyToClipboard}
+                    className="rounded-full hover:bg-primary hover:text-primary-foreground transition-all"
+                  >
+                    {copied ? <Check className="h-4 w-4 mr-2" /> : <Copy className="h-4 w-4 mr-2" />}
+                    {copied ? "Copied" : "Copy Text"}
+                  </Button>
+                </div>
+              </div>
+            </div>
           ) : (
-            <Sparkles className="mr-2 h-4 w-4" />
+            <div className="h-32 flex items-center justify-center border-2 border-dashed rounded-xl opacity-40">
+              <p className="text-sm">Your generated testimonial will appear here</p>
+            </div>
           )}
-          {isLoading ? 'Generating...' : 'Generate Testimonial'}
-        </Button>
-
-        {testimonial && (
-          <div className="mt-6 p-4 border border-primary/20 rounded-lg bg-primary/5 relative">
-             <Quote className="absolute top-2 left-2 h-8 w-8 text-primary/30 transform -translate-x-1 -translate-y-1" />
-            <p className="text-foreground italic leading-relaxed text-center pt-4">
-              "{testimonial}"
-            </p>
-            <Quote className="absolute bottom-2 right-2 h-8 w-8 text-primary/30 transform translate-x-1 translate-y-1 rotate-180" />
-          </div>
-        )}
-         {isLoading && !testimonial && (
-          <div className="mt-6 p-4 border border-dashed border-muted-foreground/30 rounded-lg bg-muted/50 text-center">
-            <Loader2 className="h-8 w-8 animate-spin text-primary mx-auto mb-2" />
-            <p className="text-muted-foreground">Generating your testimonial...</p>
-          </div>
-        )}
+        </div>
       </CardContent>
-      <CardFooter>
-        <p className="text-xs text-muted-foreground text-center w-full">
-          Note: Testimonials are generated by AI for demonstration purposes.
-        </p>
+
+      <CardFooter className="bg-muted/20 border-t py-4">
+        <div className="flex items-center justify-center w-full gap-2 text-[10px] uppercase tracking-widest text-muted-foreground font-bold">
+          <span className="h-1 w-1 rounded-full bg-primary" />
+          AI Demonstration Mode
+          <span className="h-1 w-1 rounded-full bg-primary" />
+        </div>
       </CardFooter>
     </Card>
   );
