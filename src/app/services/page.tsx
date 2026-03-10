@@ -1,8 +1,7 @@
 
 import { PageHeader } from '@/components/shared/PageHeader';
 import { services, Service as ServiceType } from '@/data/services';
-// import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'; // Card components not directly used here anymore
-// import Image from 'next/image'; // Image component removed
+import Image from 'next/image';
 import { CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -28,18 +27,30 @@ export default function ServicesPage() {
                 className={`py-8 scroll-mt-20 group ${index % 2 === 1 ? 'bg-secondary/30 rounded-lg' : ''}`}
               >
                 <div className={`interactive-transition group-hover:bg-card/10 p-6 md:p-8 rounded-lg shadow-lg border border-border/20 hover:border-primary/30 hover:shadow-xl`}>
-                  <div className="flex items-center mb-6">
-                    <IconComponent className="h-10 w-10 md:h-12 md:w-12 mr-4 text-primary group-hover:text-accent interactive-transition" />
-                    <h2 className="text-3xl md:text-4xl font-semibold text-foreground">
-                       {service.name}
-                    </h2>
+                  <div className="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                      <div className="flex items-center mb-6">
+                        <IconComponent className="h-10 w-10 md:h-12 md:w-12 mr-4 text-primary group-hover:text-accent interactive-transition" />
+                        <h2 className="text-3xl md:text-4xl font-semibold text-foreground">
+                          {service.name}
+                        </h2>
+                      </div>
+                      <p className="text-muted-foreground mb-8 text-lg leading-relaxed">
+                        {service.longDescription}
+                      </p>
+                    </div>
+                    <div className="relative h-64 md:h-80 rounded-lg overflow-hidden">
+                      <Image 
+                        src={service.imagePlaceholder} 
+                        alt={service.name} 
+                        layout="fill" 
+                        objectFit="cover" 
+                        className="interactive-transition group-hover:scale-105"
+                      />
+                    </div>
                   </div>
-                  
-                  <p className="text-muted-foreground mb-8 text-lg leading-relaxed">
-                    {service.longDescription}
-                  </p>
-                  
-                  <div className="mb-8">
+
+                  <div className="mt-8">
                     <h4 className="text-xl font-medium text-foreground mb-4">Key Features:</h4>
                     <ul className="space-y-3">
                       {service.details.map((detail, i) => (
@@ -51,11 +62,13 @@ export default function ServicesPage() {
                     </ul>
                   </div>
                   
-                  <Link href="/contact" passHref>
-                      <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 interactive-transition transform hover:scale-105">
-                          Discuss Your {service.name} Needs
-                      </Button>
-                  </Link>
+                  <div className="mt-8">
+                    <Link href="/contact" passHref>
+                        <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 interactive-transition transform hover:scale-105">
+                            Discuss Your {service.name} Needs
+                        </Button>
+                    </Link>
+                  </div>
                 </div>
               </section>
             );

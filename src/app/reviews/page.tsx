@@ -7,27 +7,26 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'; // AvatarImage will be handled
 
 
-// Sample manual testimonials
 const manualTestimonials = [
   {
-    quote: "Karan Techno transformed our online presence with a stunning website and effective SEO. Our traffic has skyrocketed!",
-    author: "Sunita Sharma",
-    company: "Blossom Boutique",
-    avatar: "https://placehold.co/100x100.png", // Kept for data consistency, but AvatarImage will be removed
+    quote: "We were struggling to get our artisanal products noticed online. Karan Techno built us a beautiful e-commerce site and their SEO work has put us on the first page of Google. We\'ve seen a 200% increase in online sales!",
+    author: "Priya Mehta",
+    company: "Jaipur Handcrafts",
+    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     hint: "smiling woman"
   },
   {
-    quote: "The mobile app developed by Karan Techno is flawless and user-friendly. Their team was professional and highly skilled.",
-    author: "Rajesh Kumar",
-    company: "QuickTask Ltd.",
-    avatar: "https://placehold.co/100x100.png",
+    quote: "Our delivery logistics were a mess. Karan Techno developed a custom mobile app for our delivery fleet that has streamlined everything. It\'s intuitive for our riders and gives us real-time tracking. A game-changer!",
+    author: "Rohan Joshi",
+    company: "Mumbai Tiffin Services",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     hint: "man with glasses"
   },
   {
-    quote: "Outstanding UI/UX design work! Karan Techno understood our vision perfectly and delivered beyond expectations.",
-    author: "Anita Desai",
-    company: "Innovate Solutions",
-    avatar: "https://placehold.co/100x100.png",
+    quote: "As a growing fintech startup, we needed a scalable and secure cloud infrastructure. Karan Techno migrated us to AWS with zero downtime. Their serverless expertise has significantly cut our operational costs.",
+    author: "Anjali Rao",
+    company: "Bangalore Fintech Solutions",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     hint: "professional woman"
   }
 ];
@@ -66,7 +65,7 @@ export default function ReviewsPage() {
                   </div>
                 </CardHeader>
                 <CardContent className="flex-grow">
-                  <p className="text-muted-foreground italic">"{testimonial.quote}"</p>
+                  <p className="text-muted-foreground italic">\"{testimonial.quote}\"</p>
                 </CardContent>
               </Card>
             ))}
