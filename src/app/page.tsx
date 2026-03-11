@@ -10,25 +10,30 @@ import Image from "next/image";
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col min-h-screen relative">
-      {/* GLOBAL BACKGROUND IMAGE WRAPPER */}
+    <div className="flex flex-col min-h-screen relative overflow-x-hidden">
+      
+      {/* 1. FIXED GLOBAL BACKGROUND WRAPPER */}
       <div 
-        className="fixed inset-0 w-full h-full -z-20 bg-cover bg-center bg-no-repeat bg-fixed"
+        className="fixed inset-0 w-full h-full -z-30 bg-cover bg-center bg-no-repeat bg-fixed"
         style={{ 
           backgroundImage: `url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop')` 
         }}
       >
         {/* Deep Overlay for readability */}
-        <div className="absolute inset-0 bg-background/80 backdrop-blur-[2px] transition-colors duration-500" />
+        <div className="absolute inset-0 bg-background/85 backdrop-blur-[1px] transition-colors duration-500" />
       </div>
 
       <main className="flex-grow relative z-10">
         
-        {/* Hero Section */}
+        {/* 2. Hero Section - Layers Fixed */}
         <section className="relative min-h-[90vh] flex items-center pt-20 pb-12 overflow-hidden">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
+          {/* Animated Glow in Hero Background */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[150px] -z-10 animate-pulse" />
+
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center relative z-10">
+            {/* Left Content */}
             <div className="text-center md:text-left space-y-8 animate-in fade-in slide-in-from-left duration-1000">
-              <Badge variant="outline" className="px-4 py-1 text-sm font-semibold tracking-widest uppercase border-primary text-primary bg-primary/10 backdrop-blur-md">
+              <Badge variant="outline" className="px-4 py-1 text-sm font-semibold tracking-widest uppercase border-primary/50 text-primary bg-primary/10 backdrop-blur-md">
                 ✨ Digital Excellence in India
               </Badge>
               <h1 className="text-5xl font-black tracking-tighter text-foreground sm:text-7xl leading-[1.05]">
@@ -51,7 +56,8 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="relative group perspective-1000 hidden md:block">
+            {/* Right Image - FIXED LAYERING */}
+            <div className="relative group perspective-1000 hidden md:block z-20">
                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-3xl blur opacity-30 group-hover:opacity-60 transition duration-1000"></div>
                <div className="relative h-[550px] w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-black/20 backdrop-blur-sm transform group-hover:rotate-y-3 transition-transform duration-700">
                 <Image
@@ -59,19 +65,21 @@ export default function HomePage() {
                     alt="Cyber Security Technology"
                     fill
                     className="object-cover transition-all duration-700 group-hover:scale-110"
+                    sizes="(max-w-7xl) 50vw, 33vw"
+                    priority
                 />
               </div>
             </div>
           </div>
           
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
+          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50 z-10">
             <MoveDown className="h-6 w-6 text-primary" />
           </div>
         </section>
 
         {/* Services Section with Glassmorphism */}
-        <section id="services" className="py-24 bg-background/40 backdrop-blur-md border-y border-white/5">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <section id="services" className="py-24 bg-background/40 backdrop-blur-md border-y border-white/5 relative z-10">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-16">
               <div className="max-w-2xl text-left">
                 <h2 className="text-4xl font-black tracking-tight text-foreground sm:text-6xl mb-4">
@@ -89,7 +97,7 @@ export default function HomePage() {
               </Link>
             </div>
             
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 relative z-10">
               {services.slice(0, 4).map((service) => (
                 <ServiceCard key={service.id} service={service} />
               ))}
@@ -98,10 +106,10 @@ export default function HomePage() {
         </section>
 
         {/* AI Showcase Section */}
-        <section className="py-32 relative overflow-hidden">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <section className="py-32 relative overflow-hidden z-10">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid lg:grid-cols-2 gap-20 items-center">
-              <div className="space-y-8">
+              <div className="space-y-8 relative z-10">
                 <Badge className="bg-primary/20 text-primary border-primary/50 backdrop-blur-xl px-4 py-1">
                   <Sparkles className="h-3 w-3 mr-2 fill-primary" /> 
                   AI Innovation Lab
@@ -132,9 +140,12 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="relative">
+              {/* Generator Placeholder */}
+              <div className="relative z-10 min-h-[400px]">
                 <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full animate-pulse" />
-
+                <div className="h-full w-full border border-white/10 rounded-3xl bg-black/40 backdrop-blur-xl flex items-center justify-center">
+                    <p className="text-muted-foreground italic text-sm">Testimonial Generator Component Here</p>
+                </div>
               </div>
             </div>
           </div>
@@ -143,7 +154,7 @@ export default function HomePage() {
       </main>
 
       {/* Footer Decoration */}
-      <footer className="py-10 text-center border-t border-white/5 bg-black/40 backdrop-blur-xl relative z-10">
+      <footer className="py-10 text-center border-t border-white/5 bg-black/40 backdrop-blur-xl relative z-20">
         <p className="text-muted-foreground text-sm tracking-widest uppercase">
           © 2024 Karan Techno • Crafted with AI Precision
         </p>
