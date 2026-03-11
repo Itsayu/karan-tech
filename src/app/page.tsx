@@ -5,75 +5,87 @@ import Link from "next/link";
 import { services } from "@/data/services";
 import { ServiceCard } from "@/components/services/ServiceCard";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Star, Quote, Sparkles } from "lucide-react";
+import { ArrowRight, Star, Quote, Sparkles, MoveDown } from "lucide-react";
 import Image from "next/image";
+import { TestimonialGenerator } from "@/components/TestimonialGenerator";
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col min-h-screen bg-background">
-      <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="relative pt-20 pb-12 md:pt-32 md:pb-20 overflow-hidden">
-          {/* Animated Background Decor */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 opacity-10 pointer-events-none">
-            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary blur-[120px]" />
-            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-accent blur-[120px]" />
-          </div>
+    <div className="flex flex-col min-h-screen relative">
+      {/* GLOBAL BACKGROUND IMAGE WRAPPER */}
+      <div 
+        className="fixed inset-0 w-full h-full -z-20 bg-cover bg-center bg-no-repeat bg-fixed"
+        style={{ 
+          backgroundImage: `url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop')` 
+        }}
+      >
+        {/* Deep Overlay for readability */}
+        <div className="absolute inset-0 bg-background/80 backdrop-blur-[2px] transition-colors duration-500" />
+      </div>
 
+      <main className="flex-grow relative z-10">
+        
+        {/* Hero Section */}
+        <section className="relative min-h-[90vh] flex items-center pt-20 pb-12 overflow-hidden">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
-            <div className="text-center md:text-left space-y-6">
-              <Badge variant="secondary" className="px-4 py-1 text-sm font-semibold tracking-wide uppercase">
-                ✨ Your Growth Partner in the Digital World
+            <div className="text-center md:text-left space-y-8 animate-in fade-in slide-in-from-left duration-1000">
+              <Badge variant="outline" className="px-4 py-1 text-sm font-semibold tracking-widest uppercase border-primary text-primary bg-primary/10 backdrop-blur-md">
+                ✨ Digital Excellence in India
               </Badge>
-              <h1 className="text-5xl font-black tracking-tighter text-foreground sm:text-6xl md:text-7xl leading-[1.1]">
-                Propel Your Business with <span className="text-primary">Expert IT</span> Solutions
+              <h1 className="text-5xl font-black tracking-tighter text-foreground sm:text-7xl leading-[1.05]">
+                Architecting <span className="text-primary drop-shadow-[0_0_15px_rgba(var(--primary),0.5)]">Tomorrow's</span> Digital Reality
               </h1>
               <p className="max-w-xl mx-auto md:mx-0 text-xl text-muted-foreground leading-relaxed">
-                Welcome to Karan Techno. From stunning websites to strategic SEO, we build the digital infrastructure your success demands.
+                Karan Techno blends creative vision with robust engineering. We don't just build websites; we engineer growth engines.
               </p>
               <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-4">
                 <Link href="/services">
-                  <Button size="lg" className="h-14 px-8 text-lg font-bold shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all">
-                    Explore Services
+                  <Button size="lg" className="h-14 px-8 text-lg font-bold shadow-2xl shadow-primary/40 hover:-translate-y-1 transition-all rounded-full">
+                    Explore Solutions
                   </Button>
                 </Link>
                 <Link href="/contact">
-                  <Button variant="outline" size="lg" className="h-14 px-8 text-lg font-bold border-2 hover:bg-secondary">
-                    Get a Free Quote
+                  <Button variant="outline" size="lg" className="h-14 px-8 text-lg font-bold border-2 bg-background/20 backdrop-blur-md hover:bg-background/40 rounded-full">
+                    Get a Quote
                   </Button>
                 </Link>
               </div>
             </div>
 
-            <div className="relative group">
-               <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-               <div className="relative h-96 w-full md:h-[500px] rounded-2xl overflow-hidden shadow-2xl border bg-card">
+            <div className="relative group perspective-1000 hidden md:block">
+               <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-3xl blur opacity-30 group-hover:opacity-60 transition duration-1000"></div>
+               <div className="relative h-[550px] w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-black/20 backdrop-blur-sm transform group-hover:rotate-y-3 transition-transform duration-700">
                 <Image
-                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop"
-                    alt="Collaborative Team"
+                    src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop"
+                    alt="Cyber Security Technology"
                     fill
-                    className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                    className="object-cover transition-all duration-700 group-hover:scale-110"
                 />
               </div>
             </div>
           </div>
+          
+          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
+            <MoveDown className="h-6 w-6 text-primary" />
+          </div>
         </section>
 
-        {/* Services Section */}
-        <section id="services" className="py-24 bg-muted/30">
+        {/* Services Section with Glassmorphism */}
+        <section id="services" className="py-24 bg-background/40 backdrop-blur-md border-y border-white/5">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-16">
               <div className="max-w-2xl text-left">
-                <h2 className="text-4xl font-black tracking-tight text-foreground sm:text-5xl mb-4">
-                  Our Core Services
+                <h2 className="text-4xl font-black tracking-tight text-foreground sm:text-6xl mb-4">
+                  Core Expertise
                 </h2>
+                <div className="h-1.5 w-24 bg-primary rounded-full mb-4" />
                 <p className="text-lg text-muted-foreground">
-                  Comprehensive IT solutions designed to drive growth in the Indian market.
+                  Bespoke IT strategies optimized for the rapidly evolving global market.
                 </p>
               </div>
               <Link href="/services">
                 <Button variant="link" className="text-primary font-bold text-lg group">
-                  View All Services <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform" />
+                  View Full Catalog <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform" />
                 </Button>
               </Link>
             </div>
@@ -86,55 +98,59 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* --- NEW: AI TESTIMONIAL ENGINE SECTION --- */}
-        <section className="py-24 bg-background relative overflow-hidden">
+        {/* AI Showcase Section */}
+        <section className="py-32 relative overflow-hidden">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <Badge className="bg-primary/10 text-primary border-none mb-4">
+            <div className="grid lg:grid-cols-2 gap-20 items-center">
+              <div className="space-y-8">
+                <Badge className="bg-primary/20 text-primary border-primary/50 backdrop-blur-xl px-4 py-1">
                   <Sparkles className="h-3 w-3 mr-2 fill-primary" /> 
                   AI Innovation Lab
                 </Badge>
-                <h2 className="text-4xl font-black tracking-tight mb-6">
-                  Experience Our <span className="text-primary italic underline decoration-wavy">AI Capabilities</span> Firsthand
+                <h2 className="text-4xl font-black tracking-tight sm:text-6xl text-white">
+                  The Future is <br />
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">Self-Generating</span>
                 </h2>
-                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                  We don't just talk about AI—we build it. Try our **Testimonial Engine** to see how we leverage Large Language Models to generate hyper-realistic social proof. 
+                <p className="text-xl text-muted-foreground leading-relaxed">
+                  We integrate advanced LLMs to help businesses automate social proof. Try our live engine to generate industry-specific testimonials in real-time.
                 </p>
                 
-                <div className="space-y-6">
-                  <div className="flex gap-4 p-4 rounded-xl border bg-card/50">
-                    <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-                      <Star className="h-5 w-5 text-primary fill-primary" />
+                <div className="grid gap-4">
+                  {[
+                    { icon: <Star className="h-5 w-5 text-primary" />, title: "NLP Integration", desc: "Context-aware generation" },
+                    { icon: <Quote className="h-5 w-5 text-accent" />, title: "Sentiment Analysis", desc: "Perfectly balanced tone" }
+                  ].map((item, i) => (
+                    <div key={i} className="flex gap-4 p-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-xl hover:bg-white/10 transition-colors">
+                      <div className="h-12 w-12 rounded-xl bg-background/50 flex items-center justify-center shrink-0 border border-white/10">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-white text-lg">{item.title}</h4>
+                        <p className="text-muted-foreground">{item.desc}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-bold">Natural Language Processing</h4>
-                      <p className="text-sm text-muted-foreground">Generating context-aware content for your specific industry.</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-4 p-4 rounded-xl border bg-card/50">
-                    <div className="h-10 w-10 rounded-full bg-accent/20 flex items-center justify-center shrink-0">
-                      <Quote className="h-5 w-5 text-accent fill-accent" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold">Dynamic Personalization</h4>
-                      <p className="text-sm text-muted-foreground">Adjusting tone and style based on service categories.</p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
 
-              {/* The Dashboard Generator we created earlier */}
               <div className="relative">
-                <div className="absolute inset-0 bg-primary/5 blur-3xl rounded-full" />
-                
+                <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full animate-pulse" />
+                <div className="relative">
+                   <TestimonialGenerator />
+                </div>
               </div>
             </div>
           </div>
         </section>
-        {/* --- END AI SECTION --- */}
 
       </main>
+
+      {/* Footer Decoration */}
+      <footer className="py-10 text-center border-t border-white/5 bg-black/40 backdrop-blur-xl relative z-10">
+        <p className="text-muted-foreground text-sm tracking-widest uppercase">
+          © 2024 Karan Techno • Crafted with AI Precision
+        </p>
+      </footer>
     </div>
   );
 }
