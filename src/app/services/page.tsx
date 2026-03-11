@@ -18,14 +18,11 @@ export default function ServicesPage() {
           backgroundImage: `url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop')` 
         }}
       >
-        {/* Deep Overlay for high-contrast content */}
         <div className="absolute inset-0 bg-neutral-950/90 backdrop-blur-[1px]" />
       </div>
 
-      {/* 2. MAIN CONTENT WRAPPER - Elevated to z-10 */}
       <main className="relative z-10 w-full">
         
-        {/* Heading Section */}
         <div className="relative py-12 md:py-16 border-b border-white/5">
           <PageHeader
             title="Engineered for Impact"
@@ -53,25 +50,35 @@ export default function ServicesPage() {
           <div className="space-y-40 md:space-y-52">
             {services.map((service: ServiceType, index: number) => {
               const IconComponent = service.icon;
-              const serviceId = service.id.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+              const serviceId = service.id.toLowerCase();
+              const serviceName = service.name.toLowerCase();
               
-              // DEFINITIVE HIGH-RES IMAGES MATCHED TO TITLES
-              const serviceImages: Record<string, string> = {
-                'web-development': 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2000&auto=format&fit=crop',
-                'seo-optimization': 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000&auto=format&fit=crop', // Data/Analytics theme
-                'cloud-solutions': 'https://images.unsplash.com/photo-1558494949-ef010ccdcc32?q=80&w=2000&auto=format&fit=crop', // Servers theme
-                'ui-ux-design': 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=2000&auto=format&fit=crop'   // Interaction theme
-              };
+              /** * IMAGE LOGIC FIX: 
+               * We check the ID and the Name for keywords to ensure unique images.
+               */
+              let imageUrl = "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2000"; // Default
 
-              const imageUrl = serviceImages[service.id] || `https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2000&auto=format&fit=crop`;
+              if (serviceId.includes('web') || serviceName.includes('web')) {
+                imageUrl = "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2000";
+              } else if (serviceId.includes('seo') || serviceName.includes('seo') || serviceName.includes('marketing')) {
+                imageUrl = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2000";
+              } else if (serviceId.includes('cloud') || serviceName.includes('cloud') || serviceId.includes('server')) {
+                imageUrl = "https://images.unsplash.com/photo-1558494949-ef010ccdcc32?q=80&w=2000";
+              } else if (serviceId.includes('design') || serviceName.includes('ux') || serviceName.includes('ui')) {
+                imageUrl = "https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?q=80&w=2000";
+              } else if (serviceId.includes('app') || serviceName.includes('mobile')) {
+                imageUrl = "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2000";
+              }
+
+              const anchorId = service.id.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
               return (
                 <section 
                   key={service.id} 
-                  id={serviceId} 
+                  id={anchorId} 
                   className="scroll-mt-40 group relative"
                 >
-                  <div className="relative overflow-hidden rounded-[3rem] border border-white/10 bg-neutral-900 backdrop-blur-sm transition-all duration-700 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5">
+                  <div className="relative overflow-hidden rounded-[3rem] border border-white/10 bg-neutral-900 backdrop-blur-sm transition-all duration-700 hover:border-primary/50 hover:shadow-2xl">
                     
                     <div className="grid lg:grid-cols-2 gap-0 items-stretch">
                       
@@ -115,7 +122,7 @@ export default function ServicesPage() {
                         </div>
                       </div>
 
-                      {/* IMAGE COLUMN - Fixed Visibility & Sizing */}
+                      {/* IMAGE COLUMN - Fixed Visibility */}
                       <div className="relative min-h-[450px] lg:min-h-full overflow-hidden z-10 bg-neutral-900 border-t lg:border-t-0 border-white/5">
                         <img 
                           src={imageUrl} 
@@ -123,10 +130,8 @@ export default function ServicesPage() {
                           className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale-[0.2] group-hover:grayscale-0"
                           loading="lazy"
                         />
-                        {/* Progressive Gradient Overlay for Mobile Readability */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90 lg:hidden" />
                         
-                        {/* Hover Decoration */}
                         <div className="absolute top-10 right-10 p-5 rounded-3xl bg-black/60 backdrop-blur-xl border border-white/10 opacity-0 group-hover:opacity-100 transition-all duration-700 shadow-2xl">
                            <Layers className="h-7 w-7 text-primary" />
                         </div>
@@ -161,7 +166,6 @@ export default function ServicesPage() {
         </section>
       </main>
 
-      {/* Footer */}
       <footer className="py-12 text-center border-t border-white/5 bg-black/80 backdrop-blur-xl relative z-20">
         <p className="text-neutral-600 text-[10px] tracking-[0.4em] uppercase font-black">
           © 2026 Karan Techno • Digital Engineering Lab
