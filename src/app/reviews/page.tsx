@@ -1,100 +1,147 @@
+"use client";
 
 import { PageHeader } from '@/components/shared/PageHeader';
-import { Star } from 'lucide-react';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import Image from 'next/image';
+import { Star, Quote, User, MessageSquare } from 'lucide-react';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 const manualTestimonials = [
   {
     quote: "We were struggling to get our artisanal products noticed online. Karan Techno built us a beautiful e-commerce site and their SEO work has put us on the first page of Google. We've seen a 200% increase in online sales!",
     author: "Ayush Kumar Tiwari",
     company: "Jaipur Handcrafts",
-    image: "https://images.unsplash.com/photo-1599423300020-83232693df94?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    imageHint: "artisanal pottery"
+    color: "from-orange-500/20 to-transparent"
   },
   {
     quote: "Our delivery logistics were a mess. Karan Techno developed a custom mobile app for our delivery fleet that has streamlined everything. It's intuitive for our riders and gives us real-time tracking. A game-changer!",
     author: "Vivek Negi",
     company: "Mumbai Tiffin Services",
-    image: "https://images.unsplash.com/photo-1621972750749-0f836155d640?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    imageHint: "food delivery boxes"
+    color: "from-blue-500/20 to-transparent"
   },
   {
     quote: "As a growing fintech startup, we needed a scalable and secure cloud infrastructure. Karan Techno migrated us to AWS with zero downtime. Their serverless expertise has significantly cut our operational costs.",
     author: "Keshav",
     company: "Bangalore Fintech Solutions",
-    image: "https://images.unsplash.com/photo-1601597111158-2f9635247c4a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    imageHint: "mobile banking app"
+    color: "from-emerald-500/20 to-transparent"
   }
 ];
 
-
 export default function ReviewsPage() {
   return (
-    <>
-      <PageHeader
-        title="Client Voices"
-        description="See what our clients say about us."
-      />
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        
-        <section className="mb-16 bg-background p-8 rounded-2xl shadow-xl">
-            <div className="flex flex-col md:flex-row items-center gap-8">
-                <Image
-                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt="Gyanendra pratap chahuan"
-                    data-ai-hint="professional man in a suit"
-                    width={150}
-                    height={150}
-                    className="rounded-lg object-cover shadow-lg"
-                />
-                <div className="text-center md:text-left">
-                    <h3 className="text-2xl font-bold text-foreground">A Message from Our Founder</h3>
-                    <p className="text-lg text-muted-foreground mt-2 italic">
-                    "We founded Karan Techno with a simple mission: to empower businesses with technology that drives real growth. Seeing our clients succeed is our greatest reward."
-                    </p>
-                    <p className="text-right text-foreground font-semibold mt-4">- Gyanendra Pratap Chauhan, Founder</p>
-                </div>
-            </div>
-        </section>
-
-        <section className="space-y-12">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-foreground mb-4 flex items-center justify-center">
-              <Star className="h-8 w-8 mr-3 text-accent" /> What Our Clients Say
-            </h2>
-            <p className="text-lg text-muted-foreground">We are proud to have partnered with amazing businesses.</p>
-          </div>
-          
-          <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
-            {manualTestimonials.map((testimonial, index) => (
-              <Card 
-                key={index} 
-                className="bg-secondary/30 border-l-4 border-accent overflow-hidden group transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl flex flex-col"
-              >
-                <CardHeader className="p-0">
-                    <Image
-                        src={testimonial.image}
-                        alt={testimonial.imageHint}
-                        data-ai-hint={testimonial.imageHint}
-                        width={400}
-                        height={250}
-                        className="object-cover w-full h-48"
-                    />
-                </CardHeader>
-                <CardContent className="p-6 flex-grow">
-                  <p className="text-muted-foreground italic text-lg">"{testimonial.quote}"</p>
-                </CardContent>
-                <CardFooter className="bg-secondary/50 p-6 flex flex-col items-center justify-center text-center">
-                  <CardTitle className="text-xl font-bold">{testimonial.author}</CardTitle>
-                  <p className="text-md text-muted-foreground">{testimonial.company}</p>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
-        </section>
-
+    <div className="relative min-h-screen">
+      {/* Global Background */}
+      <div 
+        className="fixed inset-0 w-full h-full -z-20 bg-cover bg-center bg-no-repeat bg-fixed"
+        style={{ 
+          backgroundImage: `url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop')` 
+        }}
+      >
+        <div className="absolute inset-0 bg-neutral-950/90 backdrop-blur-[2px]" />
       </div>
-    </>
+
+      <main className="relative z-10">
+        <PageHeader
+          title="Client Voices"
+          description="Real stories of growth and digital transformation from our partners across India."
+        />
+
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-24">
+          
+          {/* Founder Section */}
+          <section className="mb-24 relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-accent/50 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+            <div className="relative bg-black/40 backdrop-blur-xl p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl">
+              <div className="flex flex-col md:flex-row items-center gap-10">
+                <div className="relative shrink-0">
+                  <div className="h-32 w-32 rounded-2xl bg-primary/20 flex items-center justify-center border border-primary/50">
+                    <span className="text-5xl font-black text-primary">G</span>
+                  </div>
+                  <div className="absolute -bottom-2 -right-2 bg-accent p-2 rounded-lg">
+                    <Quote className="h-4 w-4 text-white fill-white" />
+                  </div>
+                </div>
+                <div className="text-center md:text-left space-y-4">
+                  <Badge variant="outline" className="border-primary/50 text-primary uppercase tracking-widest text-[10px]">
+                    Founder's Note
+                  </Badge>
+                  <h3 className="text-3xl font-black text-white tracking-tighter">A Message from Our Leadership</h3>
+                  <p className="text-xl text-neutral-300 italic leading-relaxed font-medium">
+                    "We founded Karan Techno with a simple mission: to empower businesses with technology that drives real growth. Seeing our clients succeed is our greatest reward."
+                  </p>
+                  <div className="pt-2">
+                    <p className="text-primary font-bold tracking-tight">Gyanendra Pratap Chauhan</p>
+                    <p className="text-neutral-500 text-sm uppercase tracking-widest">Founder & CEO</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Testimonials Grid */}
+          <section className="space-y-16">
+            <div className="text-center space-y-4">
+              <div className="flex justify-center mb-4">
+                <div className="p-3 bg-primary/10 rounded-2xl border border-primary/20">
+                  <Star className="h-8 w-8 text-primary animate-pulse" />
+                </div>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter uppercase">
+                Success Stories
+              </h2>
+              <p className="text-lg text-neutral-400 max-w-2xl mx-auto italic">
+                Strategic partnerships that yielded measurable digital results.
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              {manualTestimonials.map((testimonial, index) => (
+                <Card 
+                  key={index} 
+                  className="bg-neutral-900/50 backdrop-blur-xl border-white/10 overflow-hidden group flex flex-col hover:border-primary/50 transition-all duration-500 rounded-3xl"
+                >
+                  <CardHeader className={`p-8 bg-gradient-to-b ${testimonial.color}`}>
+                    <div className="flex justify-between items-start mb-6">
+                      <div className="h-16 w-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-primary/50 transition-colors">
+                        <span className="text-2xl font-black text-primary tracking-tighter uppercase">
+                          {testimonial.author.charAt(0)}
+                        </span>
+                      </div>
+                      <MessageSquare className="h-6 w-6 text-white/10 group-hover:text-primary/20 transition-colors" />
+                    </div>
+                  </CardHeader>
+                  
+                  <CardContent className="p-8 pt-0 flex-grow">
+                    <div className="relative">
+                      <Quote className="absolute -top-4 -left-2 h-8 w-8 text-primary/10 -z-0" />
+                      <p className="text-neutral-300 text-lg leading-relaxed relative z-10 italic">
+                        "{testimonial.quote}"
+                      </p>
+                    </div>
+                  </CardContent>
+                  
+                  <CardFooter className="p-8 border-t border-white/5 bg-black/20">
+                    <div>
+                      <CardTitle className="text-white font-black text-lg tracking-tight">
+                        {testimonial.author}
+                      </CardTitle>
+                      <p className="text-primary text-xs font-bold uppercase tracking-widest mt-1">
+                        {testimonial.company}
+                      </p>
+                    </div>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
+          </section>
+        </div>
+      </main>
+
+      {/* Footer Decoration */}
+      <footer className="py-12 text-center border-t border-white/5 bg-black/60 backdrop-blur-2xl relative z-10">
+        <p className="text-neutral-500 text-xs tracking-[0.3em] uppercase font-bold">
+          © 2026 Karan Techno • Social Proof Verified
+        </p>
+      </footer>
+    </div>
   );
 }
