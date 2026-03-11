@@ -13,7 +13,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
 import { generateTestimonial, type GenerateTestimonialInput } from '@/ai/flows/generate-testimonial';
 import { serviceOptionsForSelect, type ServiceId } from '@/data/services';
 import { useToast } from '@/hooks/use-toast';
@@ -45,12 +44,10 @@ export function TestimonialGenerator() {
 
   const handleGenerate = async () => {
     if (!selectedService) return;
-
     setIsLoading(true);
     try {
       const input: GenerateTestimonialInput = { service: selectedService };
       const result = await generateTestimonial(input);
-      
       if (result?.testimonial) {
         const newRecord: TestimonialRecord = {
           id: Math.random().toString(36).substr(2, 9),
@@ -74,120 +71,65 @@ export function TestimonialGenerator() {
     toast({ title: "Copied to clipboard" });
   };
 
-  const clearHistory = () => setHistory([]);
-
   return (
-    <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 p-4">
-      
-      {/* Left Column: Controls */}
-      <div className="lg:col-span-4 space-y-6">
-        <Card className="border-none shadow-none bg-transparent">
-          <CardHeader className="px-0 pt-0">
-            <Badge variant="outline" className="w-fit mb-2 border-primary/30 text-primary">
-              <Zap className="h-3 w-3 mr-1 fill-primary" /> AI Powered
-            </Badge>
-            <CardTitle className="text-3xl font-black tracking-tight">Review Studio</CardTitle>
-            <CardDescription>
-              Select a service and let our AI craft high-converting social proof for your brand.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="px-0 space-y-4">
-            <div className="space-y-2">
-              <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Service Category</Label>
-              <Select onValueChange={(v) => setSelectedService(v as ServiceId)}>
-                <SelectTrigger className="h-12 bg-background border-2 transition-all focus:ring-primary/20">
-                  <SelectValue placeholder="Choose a service..." />
-                </SelectTrigger>
-                <SelectContent>
-                  {serviceOptionsForSelect.map((s) => (
-                    <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <Button 
-              onClick={handleGenerate} 
-              disabled={isLoading || !selectedService}
-              className="w-full h-12 text-md font-bold transition-all hover:scale-[1.02]"
-            >
-              {isLoading ? <Loader2 className="animate-spin mr-2" /> : <Sparkles className="mr-2 h-4 w-4" />}
-              {isLoading ? "Writing..." : "Generate Review"}
-            </Button>
-          </CardContent>
-        </Card>
+    <Card className="border-2 shadow-2xl bg-card/50 backdrop-blur-sm overflow-hidden">
+      <div className="p-4 border-b flex justify-between items-center bg-muted/30">
+        <div className="flex items-center gap-2 font-bold text-sm tracking-tight">
+          <History className="h-4 w-4 text-primary" />
+          GENERATION HISTORY
+        </div>
+        <Badge variant="outline" className="bg-background/50">{history.length} Reviews</Badge>
       </div>
 
-      {/* Right Column: Feed/History */}
-      <div className="lg:col-span-8">
-        <Card className="h-full min-h-[600px] flex flex-col border-2 shadow-sm relative overflow-hidden">
-          <div className="p-4 border-b flex justify-between items-center bg-muted/20">
-            <div className="flex items-center gap-2 font-semibold">
-              <History className="h-4 w-4 text-primary" />
-              Recent Generations
-            </div>
-            {history.length > 0 && (
-              <Button variant="ghost" size="sm" onClick={clearHistory} className="text-muted-foreground hover:text-destructive">
-                <Trash2 className="h-4 w-4 mr-2" /> Clear All
-              </Button>
-            )}
-          </div>
-
-          <ScrollArea className="flex-1 p-6">
-            {history.length === 0 && !isLoading ? (
-              <div className="h-[400px] flex flex-col items-center justify-center text-center opacity-30">
-                <MessageSquareQuote className="h-16 w-16 mb-4" />
-                <p className="text-lg font-medium italic">No reviews generated yet.<br />Select a service to begin.</p>
-              </div>
-            ) : (
-              <div className="space-y-6">
-                {isLoading && (
-                   <div className="animate-pulse space-y-3 p-6 border rounded-2xl bg-muted/10">
-                    <div className="h-4 w-24 bg-muted rounded" />
-                    <div className="h-4 w-full bg-muted rounded" />
-                    <div className="h-4 w-3/4 bg-muted rounded" />
-                   </div>
-                )}
-                
-                {history.map((item) => (
-                  <div key={item.id} className="group relative p-6 border-2 rounded-2xl bg-background transition-all hover:border-primary/50 hover:shadow-md">
-                    <div className="flex justify-between items-start mb-4">
-                      <Badge variant="secondary" className="font-mono text-[10px] uppercase">
-                        {item.service}
-                      </Badge>
-                      <Button 
-                        variant="ghost" 
-                        size="icon" 
-                        className="h-8 w-8 text-muted-foreground hover:text-primary transition-colors"
-                        onClick={() => copyToClipboard(item.text, item.id)}
-                      >
-                        {copiedId === item.id ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                      </Button>
-                    </div>
-                    
-                    <div className="relative">
-                      <Quote className="absolute -top-2 -left-2 h-6 w-6 text-primary/10 -z-0" />
-                      <p className="text-foreground text-lg leading-relaxed relative z-10 italic">
-                        "{item.text}"
-                      </p>
-                    </div>
-                    
-                    <div className="mt-4 flex items-center text-[10px] text-muted-foreground uppercase tracking-tighter">
-                      Generated at {item.timestamp.toLocaleTimeString()}
-                    </div>
-                  </div>
+      <div className="p-6 space-y-6">
+        <div className="space-y-2">
+          <Label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Target Service</Label>
+          <div className="flex gap-2">
+            <Select onValueChange={(v) => setSelectedService(v as ServiceId)}>
+              <SelectTrigger className="bg-background">
+                <SelectValue placeholder="Select service..." />
+              </SelectTrigger>
+              <SelectContent>
+                {serviceOptionsForSelect.map((s) => (
+                  <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>
                 ))}
-              </div>
-            )}
-          </ScrollArea>
-          
-          <div className="p-4 bg-muted/10 border-t">
-            <p className="text-[10px] text-center text-muted-foreground uppercase font-bold tracking-[0.2em]">
-               End of Session History
-            </p>
+              </SelectContent>
+            </Select>
+            <Button onClick={handleGenerate} disabled={isLoading || !selectedService} className="shrink-0">
+              {isLoading ? <Loader2 className="animate-spin h-4 w-4" /> : <Sparkles className="h-4 w-4" />}
+            </Button>
           </div>
-        </Card>
+        </div>
+
+        <ScrollArea className="h-[300px] pr-4">
+          {history.length === 0 && !isLoading ? (
+            <div className="h-full flex flex-col items-center justify-center text-center opacity-20 py-10">
+              <MessageSquareQuote className="h-12 w-12 mb-2" />
+              <p className="text-xs font-bold uppercase tracking-tighter">No reviews yet</p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {isLoading && (
+                <div className="animate-pulse p-4 border rounded-xl bg-muted/20 space-y-2">
+                  <div className="h-2 w-20 bg-muted rounded" />
+                  <div className="h-2 w-full bg-muted rounded" />
+                </div>
+              )}
+              {history.map((item) => (
+                <div key={item.id} className="p-4 border rounded-xl bg-background group relative hover:border-primary/50 transition-colors">
+                   <div className="flex justify-between items-start mb-2">
+                    <span className="text-[10px] font-bold text-primary uppercase">{item.service}</span>
+                    <button onClick={() => copyToClipboard(item.text, item.id)} className="text-muted-foreground hover:text-primary">
+                      {copiedId === item.id ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                    </button>
+                  </div>
+                  <p className="text-sm italic leading-snug">"{item.text}"</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </ScrollArea>
       </div>
-    </div>
+    </Card>
   );
 }
