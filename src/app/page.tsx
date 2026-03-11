@@ -5,99 +5,109 @@ import Link from "next/link";
 import { services } from "@/data/services";
 import { ServiceCard } from "@/components/services/ServiceCard";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Star, Quote, Sparkles, MoveDown } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight, Star, Quote, Sparkles, MoveDown, Globe, Shield, Cpu } from "lucide-react";
+import { TestimonialGenerator } from "@/components/TestimonialGenerator";
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col min-h-screen relative overflow-x-hidden">
+    <div className="flex flex-col min-h-screen relative overflow-x-hidden text-foreground">
       
-      {/* 1. FIXED GLOBAL BACKGROUND WRAPPER */}
+      {/* 1. GLOBAL BACKGROUND IMAGE (The Universe/Tech Background) */}
       <div 
-        className="fixed inset-0 w-full h-full -z-30 bg-cover bg-center bg-no-repeat bg-fixed"
+        className="fixed inset-0 w-full h-full -z-50 bg-cover bg-center bg-no-repeat bg-fixed"
         style={{ 
           backgroundImage: `url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop')` 
         }}
       >
-        {/* Deep Overlay for readability */}
-        <div className="absolute inset-0 bg-background/85 backdrop-blur-[1px] transition-colors duration-500" />
+        {/* Dark overlay to ensure text is readable */}
+        <div className="absolute inset-0 bg-neutral-950/80 backdrop-blur-[2px]" />
       </div>
 
       <main className="flex-grow relative z-10">
         
-        {/* 2. Hero Section - Layers Fixed */}
-        <section className="relative min-h-[90vh] flex items-center pt-20 pb-12 overflow-hidden">
-          {/* Animated Glow in Hero Background */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[150px] -z-10 animate-pulse" />
-
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center relative z-10">
-            {/* Left Content */}
-            <div className="text-center md:text-left space-y-8 animate-in fade-in slide-in-from-left duration-1000">
-              <Badge variant="outline" className="px-4 py-1 text-sm font-semibold tracking-widest uppercase border-primary/50 text-primary bg-primary/10 backdrop-blur-md">
-                ✨ Digital Excellence in India
+        {/* 2. HERO SECTION */}
+        <section className="relative min-h-screen flex items-center pt-20 pb-12">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+            
+            {/* Left Column: Text Content */}
+            <div className="text-center lg:text-left space-y-8 z-20 animate-in fade-in slide-in-from-left duration-1000">
+              <Badge variant="outline" className="px-4 py-1 text-sm font-semibold tracking-widest uppercase border-primary/50 text-primary bg-primary/10 backdrop-blur-xl">
+                ✨ Premium IT Consultancy
               </Badge>
-              <h1 className="text-5xl font-black tracking-tighter text-foreground sm:text-7xl leading-[1.05]">
-                Architecting <span className="text-primary drop-shadow-[0_0_15px_rgba(var(--primary),0.5)]">Tomorrow's</span> Digital Reality
+              <h1 className="text-5xl font-black tracking-tighter text-white sm:text-7xl leading-[1.05]">
+                Empowering <span className="text-primary drop-shadow-[0_0_20px_rgba(var(--primary),0.6)]">Digital</span> Evolution
               </h1>
-              <p className="max-w-xl mx-auto md:mx-0 text-xl text-muted-foreground leading-relaxed">
-                Karan Techno blends creative vision with robust engineering. We don't just build websites; we engineer growth engines.
+              <p className="max-w-xl mx-auto lg:mx-0 text-xl text-neutral-300 leading-relaxed">
+                Karan Techno delivers high-performance IT solutions. We bridge the gap between complex technology and your business goals.
               </p>
-              <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-4">
+              <div className="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
                 <Link href="/services">
-                  <Button size="lg" className="h-14 px-8 text-lg font-bold shadow-2xl shadow-primary/40 hover:-translate-y-1 transition-all rounded-full">
-                    Explore Solutions
+                  <Button size="lg" className="h-14 px-8 text-lg font-bold shadow-2xl shadow-primary/40 hover:-translate-y-1 transition-all rounded-full bg-primary text-primary-foreground">
+                    Get Started
                   </Button>
                 </Link>
                 <Link href="/contact">
-                  <Button variant="outline" size="lg" className="h-14 px-8 text-lg font-bold border-2 bg-background/20 backdrop-blur-md hover:bg-background/40 rounded-full">
-                    Get a Quote
+                  <Button variant="outline" size="lg" className="h-14 px-8 text-lg font-bold border-2 bg-white/5 backdrop-blur-md hover:bg-white/10 text-white rounded-full border-white/20">
+                    Contact Us
                   </Button>
                 </Link>
               </div>
             </div>
 
-            {/* Right Image - FIXED LAYERING */}
-            <div className="relative group perspective-1000 hidden md:block z-20">
-               <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-3xl blur opacity-30 group-hover:opacity-60 transition duration-1000"></div>
-               <div className="relative h-[550px] w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-black/20 backdrop-blur-sm transform group-hover:rotate-y-3 transition-transform duration-700">
-                <Image
-                    src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop"
-                    alt="Cyber Security Technology"
-                    fill
-                    className="object-cover transition-all duration-700 group-hover:scale-110"
-                    sizes="(max-w-7xl) 50vw, 33vw"
-                    priority
+            {/* Right Column: THE MISSING IMAGE FIX */}
+            <div className="relative group perspective-1000 z-30">
+               {/* Glow Effect behind image */}
+               <div className="absolute -inset-4 bg-primary/20 rounded-full blur-[100px] opacity-50 group-hover:opacity-100 transition duration-1000"></div>
+               
+               {/* The Hero Image Container */}
+               <div className="relative h-[400px] sm:h-[500px] w-full rounded-[2rem] overflow-hidden shadow-2xl border border-white/20 bg-neutral-900/50 backdrop-blur-sm transform group-hover:scale-[1.02] transition-all duration-700">
+                <img
+                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop"
+                    alt="Consultancy and Technology"
+                    className="w-full h-full object-cover transition-all duration-700 group-hover:brightness-110"
                 />
+                {/* Decorative Overlay on image */}
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/80 via-transparent to-transparent" />
+                
+                {/* Floating Badge on Image */}
+                <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10">
+                    <div className="flex items-center gap-3">
+                        <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center">
+                            <Cpu className="h-5 w-5 text-primary" />
+                        </div>
+                        <p className="text-white font-bold text-sm tracking-tight">AI & Cloud Integrated Solutions</p>
+                    </div>
+                </div>
               </div>
             </div>
           </div>
           
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50 z-10">
-            <MoveDown className="h-6 w-6 text-primary" />
+          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-30">
+            <MoveDown className="h-6 w-6 text-white" />
           </div>
         </section>
 
-        {/* Services Section with Glassmorphism */}
-        <section id="services" className="py-24 bg-background/40 backdrop-blur-md border-y border-white/5 relative z-10">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-16">
-              <div className="max-w-2xl text-left">
-                <h2 className="text-4xl font-black tracking-tight text-foreground sm:text-6xl mb-4">
-                  Core Expertise
+        {/* 3. SERVICES SECTION */}
+        <section id="services" className="py-24 bg-black/40 backdrop-blur-xl border-y border-white/5 relative z-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col lg:flex-row justify-between items-end gap-6 mb-16">
+              <div className="max-w-2xl">
+                <h2 className="text-4xl font-black tracking-tight text-white sm:text-6xl mb-4 uppercase">
+                  Our Expertise
                 </h2>
-                <div className="h-1.5 w-24 bg-primary rounded-full mb-4" />
-                <p className="text-lg text-muted-foreground">
-                  Bespoke IT strategies optimized for the rapidly evolving global market.
+                <div className="h-2 w-20 bg-primary rounded-full mb-6" />
+                <p className="text-lg text-neutral-400">
+                  Specialized IT services designed for scalability and global impact.
                 </p>
               </div>
               <Link href="/services">
-                <Button variant="link" className="text-primary font-bold text-lg group">
-                  View Full Catalog <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform" />
+                <Button variant="link" className="text-primary font-bold text-lg group hover:no-underline">
+                  Browse All <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform" />
                 </Button>
               </Link>
             </div>
             
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 relative z-10">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
               {services.slice(0, 4).map((service) => (
                 <ServiceCard key={service.id} service={service} />
               ))}
@@ -105,47 +115,45 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* AI Showcase Section */}
-        <section className="py-32 relative overflow-hidden z-10">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* 4. AI CAPABILITIES SECTION */}
+        <section className="py-32 relative z-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-20 items-center">
-              <div className="space-y-8 relative z-10">
+              <div className="space-y-8">
                 <Badge className="bg-primary/20 text-primary border-primary/50 backdrop-blur-xl px-4 py-1">
                   <Sparkles className="h-3 w-3 mr-2 fill-primary" /> 
-                  AI Innovation Lab
+                  Innovation Engine
                 </Badge>
                 <h2 className="text-4xl font-black tracking-tight sm:text-6xl text-white">
-                  The Future is <br />
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">Self-Generating</span>
+                  Intelligent <br />
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">Automation</span>
                 </h2>
-                <p className="text-xl text-muted-foreground leading-relaxed">
-                  We integrate advanced LLMs to help businesses automate social proof. Try our live engine to generate industry-specific testimonials in real-time.
+                <p className="text-xl text-neutral-400 leading-relaxed">
+                  We don't just build software; we build intelligence. Our Testimonial Engine below is a live demonstration of how we can automate complex content workflows for your business.
                 </p>
                 
-                <div className="grid gap-4">
-                  {[
-                    { icon: <Star className="h-5 w-5 text-primary" />, title: "NLP Integration", desc: "Context-aware generation" },
-                    { icon: <Quote className="h-5 w-5 text-accent" />, title: "Sentiment Analysis", desc: "Perfectly balanced tone" }
-                  ].map((item, i) => (
-                    <div key={i} className="flex gap-4 p-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-xl hover:bg-white/10 transition-colors">
-                      <div className="h-12 w-12 rounded-xl bg-background/50 flex items-center justify-center shrink-0 border border-white/10">
-                        {item.icon}
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-white text-lg">{item.title}</h4>
-                        <p className="text-muted-foreground">{item.desc}</p>
-                      </div>
+                <div className="grid sm:grid-cols-2 gap-6">
+                  <div className="flex gap-4 p-6 rounded-3xl border border-white/5 bg-white/5 backdrop-blur-xl">
+                    <Shield className="h-6 w-6 text-primary shrink-0" />
+                    <div>
+                      <h4 className="font-bold text-white uppercase text-xs tracking-widest mb-1">Secure</h4>
+                      <p className="text-sm text-neutral-500">Enterprise-grade cloud security.</p>
                     </div>
-                  ))}
+                  </div>
+                  <div className="flex gap-4 p-6 rounded-3xl border border-white/5 bg-white/5 backdrop-blur-xl">
+                    <Globe className="h-6 w-6 text-accent shrink-0" />
+                    <div>
+                      <h4 className="font-bold text-white uppercase text-xs tracking-widest mb-1">Global</h4>
+                      <p className="text-sm text-neutral-500">Infrastructure built for scale.</p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Generator Placeholder */}
-              <div className="relative z-10 min-h-[400px]">
-                <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full animate-pulse" />
-                <div className="h-full w-full border border-white/10 rounded-3xl bg-black/40 backdrop-blur-xl flex items-center justify-center">
-                    <p className="text-muted-foreground italic text-sm">Testimonial Generator Component Here</p>
-                </div>
+              {/* TESTIMONIAL GENERATOR COMPONENT */}
+              <div className="relative">
+                <div className="absolute inset-0 bg-primary/20 blur-[120px] rounded-full animate-pulse" />
+                <TestimonialGenerator />
               </div>
             </div>
           </div>
@@ -153,10 +161,10 @@ export default function HomePage() {
 
       </main>
 
-      {/* Footer Decoration */}
-      <footer className="py-10 text-center border-t border-white/5 bg-black/40 backdrop-blur-xl relative z-20">
-        <p className="text-muted-foreground text-sm tracking-widest uppercase">
-          © 2024 Karan Techno • Crafted with AI Precision
+      {/* FOOTER */}
+      <footer className="py-12 text-center border-t border-white/5 bg-black/60 backdrop-blur-2xl relative z-30">
+        <p className="text-neutral-500 text-xs tracking-[0.3em] uppercase font-bold">
+          © 2026 Karan Techno • Engineering the Future
         </p>
       </footer>
     </div>
