@@ -7,7 +7,6 @@ import { ServiceCard } from "@/components/services/ServiceCard";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Star, Quote, Sparkles } from "lucide-react";
 import Image from "next/image";
-import { TestimonialGenerator } from "@/components/TestimonialGenerator"; // Import our new component
 
 export default function HomePage() {
   return (
@@ -128,7 +127,7 @@ export default function HomePage() {
               {/* The Dashboard Generator we created earlier */}
               <div className="relative">
                 <div className="absolute inset-0 bg-primary/5 blur-3xl rounded-full" />
-                <TestimonialGenerator />
+                
               </div>
             </div>
           </div>
