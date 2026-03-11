@@ -9,32 +9,39 @@ import { Badge } from '@/components/ui/badge';
 
 export default function ServicesPage() {
   return (
-    <div className="relative min-h-screen">
-      {/* 1. GLOBAL BACKGROUND */}
+    <div className="relative min-h-screen bg-neutral-950">
+      
+      {/* 1. UNDERLAY: THE BACKGROUND IMAGE */}
       <div 
-        className="fixed inset-0 w-full h-full -z-20 bg-cover bg-center bg-no-repeat bg-fixed"
+        className="fixed inset-0 w-full h-full -z-50 bg-cover bg-center bg-no-repeat bg-fixed"
         style={{ 
           backgroundImage: `url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop')` 
         }}
       >
-        <div className="absolute inset-0 bg-neutral-950/90 backdrop-blur-[2px]" />
+        {/* The Black Glass Overlay */}
+        <div className="absolute inset-0 bg-black/85 backdrop-blur-[2px]" />
       </div>
 
-      <main className="relative z-10">
-        <PageHeader
-          title="Engineered for Impact"
-          description="We deliver high-performance IT solutions designed to scale your business and outpace the competition."
-          className="bg-transparent border-b border-white/5"
-        />
+      {/* 2. MAIN CONTENT WRAPPER - Elevated to z-10 */}
+      <main className="relative z-10 w-full">
+        
+        {/* HEADING FIX: Ensure PageHeader is white and high-contrast */}
+        <div className="relative py-10 border-b border-white/10">
+          <PageHeader
+            title="Engineered for Impact"
+            description="High-performance IT solutions designed to scale your business and outpace the competition."
+            className="text-white drop-shadow-2xl" 
+          />
+        </div>
 
         {/* Quick Nav Bar */}
-        <div className="sticky top-16 z-30 bg-black/60 backdrop-blur-xl border-b border-white/10 py-4 hidden md:block">
-            <div className="mx-auto max-w-7xl px-4 flex justify-center gap-6">
+        <div className="sticky top-16 z-40 bg-black/80 backdrop-blur-xl border-b border-white/10 py-4 hidden md:block">
+            <div className="mx-auto max-w-7xl px-4 flex justify-center gap-8">
                 {services.map((s) => (
                     <a 
                       key={s.id} 
                       href={`#${s.id.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
-                      className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-primary transition-colors"
+                      className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400 hover:text-primary transition-colors"
                     >
                         {s.name}
                     </a>
@@ -42,99 +49,85 @@ export default function ServicesPage() {
             </div>
         </div>
 
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
-          <div className="space-y-32">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24">
+          <div className="space-y-40">
             {services.map((service: ServiceType, index: number) => {
               const IconComponent = service.icon;
               const serviceId = service.id.toLowerCase().replace(/[^a-z0-9]+/g, '-');
               
-              // DEFINED ONLINE IMAGES
+              // HIGH CONTRAST TECH IMAGES
               const serviceImages: Record<string, string> = {
-                'web-development': 'https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=2000&auto=format&fit=crop',
-                'seo-optimization': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2000&auto=format&fit=crop',
-                'cloud-solutions': 'https://images.unsplash.com/photo-1558494949-ef010ccdcc32?q=80&w=2000&auto=format&fit=crop',
-                'ui-ux-design': 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=2000&auto=format&fit=crop'
+                'web-development': 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000',
+                'seo-optimization': 'https://images.unsplash.com/photo-1551288049-bbbda546697a?q=80&w=1000',
+                'cloud-solutions': 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=1000',
+                'ui-ux-design': 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1000'
               };
 
-              const imageUrl = serviceImages[service.id] || `https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2000&auto=format&fit=crop`;
+              const imageUrl = serviceImages[service.id] || `https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000`;
 
               return (
                 <section 
                   key={service.id} 
                   id={serviceId} 
-                  className="scroll-mt-32 group"
+                  className="scroll-mt-40 group relative"
                 >
-                  <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.03] backdrop-blur-md transition-all duration-500 hover:border-primary/40 hover:bg-white/[0.05]">
+                  <div className="relative overflow-hidden rounded-[3rem] border border-white/10 bg-neutral-900/40 backdrop-blur-xl transition-all duration-700 hover:border-primary/50">
                     
-                    <div className="grid lg:grid-cols-2 gap-0 items-stretch">
+                    <div className="grid lg:grid-cols-2 gap-0">
                       
-                      {/* Text Content */}
-                      <div className={`p-8 md:p-16 flex flex-col justify-center ${index % 2 === 1 ? 'lg:order-last' : ''}`}>
-                        <div className="space-y-6">
-                          <div className="flex items-center gap-4">
-                            <div className="h-16 w-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
-                                <IconComponent className="h-8 w-8" />
+                      {/* TEXT SIDE */}
+                      <div className={`p-10 md:p-20 flex flex-col justify-center ${index % 2 === 1 ? 'lg:order-last border-l border-white/5' : 'border-r border-white/5'}`}>
+                        <div className="space-y-8">
+                          <div className="flex items-center gap-6">
+                            <div className="h-20 w-20 rounded-3xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-black transition-all duration-500 transform group-hover:-rotate-6">
+                                <IconComponent className="h-10 w-10" />
                             </div>
-                            <Badge variant="outline" className="border-primary/30 text-primary uppercase tracking-tighter">
-                                Service 0{index + 1}
+                            <Badge variant="outline" className="border-primary/40 text-primary px-4 py-1 text-xs font-bold tracking-widest uppercase">
+                                Capability 0{index + 1}
                             </Badge>
                           </div>
 
-                          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter leading-none">
+                          <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-none">
                             {service.name}
                           </h2>
 
-                          <p className="text-neutral-400 text-lg leading-relaxed italic border-l-2 border-primary/20 pl-6">
+                          <p className="text-neutral-400 text-xl leading-relaxed font-medium">
                             {service.longDescription}
                           </p>
 
-                          <div className="space-y-4 pt-4">
-                            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-primary/80 flex items-center">
-                                <Layers className="h-4 w-4 mr-2" /> Core Features
-                            </h4>
-                            <div className="grid sm:grid-cols-2 gap-3">
-                              {service.details.map((detail, i) => (
-                                <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
-                                  <CheckCircle className="h-4 w-4 text-primary mt-1 shrink-0" />
-                                  <span className="text-sm text-neutral-300 font-medium leading-tight">{detail}</span>
-                                </div>
-                              ))}
-                            </div>
+                          <div className="grid sm:grid-cols-2 gap-4 pt-4">
+                            {service.details.map((detail, i) => (
+                              <div key={i} className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/5 group-hover:border-primary/20 transition-all">
+                                <CheckCircle className="h-5 w-5 text-primary shrink-0" />
+                                <span className="text-sm text-neutral-200 font-bold tracking-tight">{detail}</span>
+                              </div>
+                            ))}
                           </div>
 
-                          <div className="pt-8">
-                            <Link href="/contact" passHref>
-                              <Button size="lg" className="rounded-full px-8 font-black uppercase tracking-widest text-xs h-14 group/btn bg-primary hover:bg-primary/90">
-                                Discuss Requirements 
-                                <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                          <div className="pt-10">
+                            <Link href="/contact">
+                              <Button size="lg" className="rounded-full px-10 font-black uppercase tracking-widest text-xs h-16 shadow-xl shadow-primary/20 hover:scale-105 transition-transform">
+                                Discuss Project 
+                                <ArrowRight className="ml-3 h-5 w-5" />
                               </Button>
                             </Link>
                           </div>
                         </div>
                       </div>
 
-                      {/* FIXED Image Section */}
-                      <div className="relative min-h-[450px] lg:min-h-full overflow-hidden bg-neutral-900">
+                      {/* IMAGE SIDE - Forced Visibility */}
+                      <div className="relative min-h-[500px] lg:min-h-full overflow-hidden z-20">
                         <img 
                           src={imageUrl} 
                           alt={service.name} 
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale-[0.2] group-hover:grayscale-0"
-                          loading="lazy"
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                          style={{ filter: 'brightness(0.8) contrast(1.2)' }}
                         />
-                        {/* Image Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/80 via-neutral-950/20 to-transparent lg:hidden" />
+                        {/* High-Contrast Gradient for Mobile Readability */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent lg:hidden" />
                         
-                        {/* Floating Interaction Hint */}
-                        <div className="absolute bottom-8 left-8 right-8 p-6 rounded-2xl bg-black/60 backdrop-blur-xl border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 hidden md:block">
-                            <div className="flex items-center gap-4">
-                                <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center animate-pulse">
-                                    <MousePointer2 className="h-5 w-5 text-white" />
-                                </div>
-                                <div>
-                                    <p className="text-white font-bold text-sm">Industry Standard Execution</p>
-                                    <p className="text-neutral-400 text-xs tracking-tight uppercase">Proprietary Workflow</p>
-                                </div>
-                            </div>
+                        <div className="absolute top-8 right-8 p-4 rounded-2xl bg-black/60 backdrop-blur-md border border-white/10 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                           <Layers className="h-6 w-6 text-primary" />
                         </div>
                       </div>
 
@@ -146,19 +139,28 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        {/* CTA Section */}
-        <section className="py-24 bg-primary/10 backdrop-blur-xl border-t border-white/10 text-center">
-            <div className="mx-auto max-w-3xl px-4 space-y-8">
-                <h3 className="text-4xl font-black text-white tracking-tighter">Ready to start your digital journey?</h3>
-                <p className="text-neutral-400 text-lg">Our experts are standing by to transform your vision into a market-leading reality.</p>
+        {/* CTA */}
+        <section className="py-32 bg-primary/5 border-t border-white/10 text-center relative z-10">
+            <div className="mx-auto max-w-4xl px-4 space-y-10">
+                <h3 className="text-5xl md:text-7xl font-black text-white tracking-tighter">Ready to <span className="text-primary italic">Transform?</span></h3>
+                <p className="text-neutral-400 text-xl font-medium max-w-2xl mx-auto leading-relaxed">
+                  Join the elite businesses leveraging Karan Techno's engineering excellence to dominate the Indian digital market.
+                </p>
                 <Link href="/contact">
-                    <Button size="lg" variant="outline" className="h-16 px-12 rounded-full border-2 text-white font-bold text-lg hover:bg-white/10 transition-all border-white/20">
-                        Schedule a Free Strategy Call
+                    <Button size="lg" variant="outline" className="h-20 px-16 rounded-full border-2 text-white font-black text-xl hover:bg-primary hover:text-black hover:border-primary transition-all duration-500">
+                        BOOK A CONSULTATION
                     </Button>
                 </Link>
             </div>
         </section>
       </main>
+
+      {/* Footer */}
+      <footer className="py-12 text-center border-t border-white/5 bg-black/80 backdrop-blur-2xl relative z-20">
+        <p className="text-neutral-500 text-xs tracking-[0.4em] uppercase font-black">
+          © 2026 Karan Techno • Digital Engineering Lab
+        </p>
+      </footer>
     </div>
   );
 }
