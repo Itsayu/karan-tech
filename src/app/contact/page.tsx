@@ -2,7 +2,7 @@
 
 import { PageHeader } from '@/components/shared/PageHeader';
 import { ContactForm } from '@/components/contact/ContactForm';
-import { Mail, MapPin, Clock, Shield Check, Send } from 'lucide-react';
+import { Mail, MapPin, Clock, ShieldCheck, Send } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
 export default function ContactPage() {
