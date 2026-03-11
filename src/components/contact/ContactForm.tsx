@@ -1,174 +1,142 @@
-
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { contactFormSchema, type ContactFormState } from "@/lib/form-schemas";
-import { submitContactForm } from "@/lib/actions";
-import type { z } from "zod";
+import { PageHeader } from '@/components/shared/PageHeader';
+import { ContactForm } from '@/components/contact/ContactForm';
+import { Mail, MapPin, Clock, ShieldCheck, Send } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { useToast } from "@/hooks/use-toast";
-import { serviceOptionsForSelect } from "@/data/services";
-import { Loader2 } from "lucide-react";
-
-type Inputs = z.infer<typeof contactFormSchema>;
-
-const initialState: ContactFormState = {
-  message: "",
-  success: false,
-};
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
+export default function ContactPage() {
   return (
-    <Button type="submit" disabled={pending} className="w-full bg-accent text-accent-foreground hover:bg-accent/90 transition-colors duration-300 transform hover:scale-105">
-      {pending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-      {pending ? "Submitting..." : "Send Message"}
-    </Button>
-  );
-}
-
-export function ContactForm() {
-  const [state, formAction] = useFormState(submitContactForm, initialState);
-  const { toast } = useToast();
-
-  const form = useForm<Inputs>({
-    resolver: zodResolver(contactFormSchema),
-    defaultValues: {
-      name: state.fields?.name || "",
-      email: state.fields?.email || "",
-      service: (state.fields?.service as Inputs['service']) || undefined,
-      message: state.fields?.message || "",
-    },
-  });
-
-  useEffect(() => {
-    if (state.message) {
-      if (state.success) {
-        toast({
-          title: "Success!",
-          description: state.message,
-        });
-        form.reset(); // Reset form on successful submission
-      } else if (state.issues && state.issues.length > 0) {
-        // Focus on the first field with an error
-        const firstErrorField = state.issues[0].includes("Name") ? "name"
-                               : state.issues[0].includes("email") ? "email"
-                               : state.issues[0].includes("service") ? "service"
-                               : state.issues[0].includes("Message") ? "message"
-                               : undefined;
-
-        if(firstErrorField) {
-            // @ts-ignore
-            form.setError(firstErrorField, { message: state.issues[0] });
-        }
-        
-        toast({
-          title: "Error",
-          description: state.issues.join("\n") || state.message,
-          variant: "destructive",
-        });
-
-      } else if (!state.success && state.message) {
-         toast({
-          title: "Error",
-          description: state.message,
-          variant: "destructive",
-        });
-      }
-    }
-  }, [state, toast, form]);
-  
-  const onSelectChange = (value: string) => {
-    form.setValue("service", value as Inputs['service']);
-    form.clearErrors("service");
-  };
-
-
-  return (
-    <form action={formAction} className="space-y-6 max-w-xl mx-auto p-6 sm:p-8 bg-card shadow-xl rounded-lg border">
-      <div>
-        <Label htmlFor="name" className="block text-sm font-medium text-foreground">Full Name</Label>
-        <Input
-          id="name"
-          {...form.register("name")}
-          className="mt-1 block w-full"
-          aria-invalid={form.formState.errors.name ? "true" : "false"}
-        />
-        {form.formState.errors.name && (
-          <p className="mt-1 text-sm text-destructive">{form.formState.errors.name.message}</p>
-        )}
-      </div>
-
-      <div>
-        <Label htmlFor="email" className="block text-sm font-medium text-foreground">Email Address</Label>
-        <Input
-          id="email"
-          type="email"
-          {...form.register("email")}
-          className="mt-1 block w-full"
-          aria-invalid={form.formState.errors.email ? "true" : "false"}
-        />
-        {form.formState.errors.email && (
-          <p className="mt-1 text-sm text-destructive">{form.formState.errors.email.message}</p>
-        )}
-      </div>
-
-      <div>
-        <Label htmlFor="service" className="block text-sm font-medium text-foreground">Service of Interest</Label>
-         <Select
-            onValueChange={onSelectChange}
-            defaultValue={form.getValues("service")}
-            {...form.register("service")}
-          >
-          <SelectTrigger 
-            id="service" 
-            className="mt-1 block w-full"
-            aria-invalid={form.formState.errors.service ? "true" : "false"}
-          >
-            <SelectValue placeholder="Select a service" />
-          </SelectTrigger>
-          <SelectContent>
-            {serviceOptionsForSelect.map((option) => (
-              <SelectItem key={option.value} value={option.value}>
-                {option.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        {form.formState.errors.service && (
-          <p className="mt-1 text-sm text-destructive">{form.formState.errors.service.message}</p>
-        )}
-      </div>
-
-      <div>
-        <Label htmlFor="message" className="block text-sm font-medium text-foreground">Your Message</Label>
-        <Textarea
-          id="message"
-          {...form.register("message")}
-          rows={5}
-          className="mt-1 block w-full"
-          aria-invalid={form.formState.errors.message ? "true" : "false"}
-        />
-        {form.formState.errors.message && (
-          <p className="mt-1 text-sm text-destructive">{form.formState.errors.message.message}</p>
-        )}
-      </div>
+    <div className="relative min-h-screen text-slate-200 selection:bg-primary/30">
       
-      <SubmitButton />
-    </form>
+      {/* 1. FIXED GLOBAL BACKGROUND (Inherited Theme) */}
+      <div 
+        className="fixed inset-0 w-full h-full -z-50 bg-cover bg-center bg-no-repeat bg-fixed opacity-60"
+        style={{ 
+          backgroundImage: `url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop')` 
+        }}
+      >
+        {/* Deep dark overlay to make text pop */}
+        <div className="absolute inset-0 bg-neutral-950/90 backdrop-blur-[2px]" />
+      </div>
+
+      <main className="relative z-10">
+        <PageHeader
+          title="Get in Touch"
+          description="Ready to propel your business forward? Our engineers and consultants are standing by to architect your success."
+          className="text-white drop-shadow-2xl border-b border-white/5 bg-transparent"
+        />
+
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-24">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            
+            {/* Left Column: The Form with Glassmorphism */}
+            <div className="relative group animate-in fade-in slide-in-from-left duration-700">
+              {/* Outer Glow Effect */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-blue-600/50 rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+              
+              <div className="relative bg-black/40 backdrop-blur-xl p-8 md:p-12 rounded-[2rem] border border-white/10 shadow-2xl">
+                <div className="flex items-center gap-4 mb-8">
+                    <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
+                        <Send className="h-6 w-6 text-primary" />
+                    </div>
+                    <h2 className="text-3xl font-black tracking-tighter text-white uppercase italic underline decoration-primary/40 underline-offset-8">Send a Message</h2>
+                </div>
+                <ContactForm />
+              </div>
+            </div>
+
+            {/* Right Column: Info & Imagery */}
+            <div className="space-y-8 animate-in fade-in slide-in-from-right duration-700">
+              
+              {/* Imagery Section */}
+              <div className="relative w-full h-80 rounded-[2rem] shadow-2xl overflow-hidden border border-white/10 group bg-neutral-900">
+                <img 
+                  src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000&auto=format&fit=crop" 
+                  alt="Digital connection and support" 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[0.4] group-hover:grayscale-0"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent opacity-90" />
+                <div className="absolute bottom-6 left-8">
+                    <Badge className="bg-primary/20 text-primary border-primary/50 backdrop-blur-xl px-4 py-1 uppercase tracking-widest text-[10px] font-black">
+                        Secure Comms Terminal
+                    </Badge>
+                </div>
+              </div>
+
+              {/* Contact Info Card */}
+              <div className="p-10 bg-white/[0.03] backdrop-blur-xl rounded-[2.5rem] border border-white/10 shadow-2xl space-y-10">
+                <div className="space-y-2">
+                    <h2 className="text-3xl font-black text-white tracking-tighter uppercase">Contact Details</h2>
+                    <p className="text-slate-400 font-medium italic">Direct lines to our strategy department.</p>
+                </div>
+
+                <div className="space-y-8">
+                  {/* Mail Item */}
+                  <div className="flex items-center group">
+                    <div className="h-14 w-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mr-6 group-hover:border-primary/50 transition-all duration-300">
+                        <Mail className="h-6 w-6 text-primary" />
+                    </div>
+                    <div className="flex flex-col">
+                        <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Primary Email</span>
+                        <a href="mailto:kchauhan726@gmail.com" className="text-xl text-slate-200 font-bold hover:text-primary transition-colors">
+                          kchauhan726@gmail.com
+                        </a>
+                    </div>
+                  </div>
+
+                  {/* Location Item */}
+                  <div className="flex items-start group">
+                    <div className="h-14 w-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mr-6 group-hover:border-primary/50 transition-all duration-300 shrink-0">
+                        <MapPin className="h-6 w-6 text-primary" />
+                    </div>
+                    <div className="flex flex-col">
+                        <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Operational Hub</span>
+                        <span className="text-xl text-slate-200 font-bold leading-tight">
+                          GG15, Casa Homes, Sector 115,<br /> Mohali, Punjab - 140307
+                        </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Business Hours with Neon Accents */}
+                <div className="pt-8 border-t border-white/5">
+                    <div className="flex items-start gap-5 p-6 rounded-2xl bg-primary/5 border border-primary/10 relative overflow-hidden group/hours">
+                        <div className="absolute top-0 left-0 w-1 h-full bg-primary opacity-50 group-hover/hours:opacity-100 transition-opacity" />
+                        <Clock className="h-6 w-6 text-primary shrink-0 mt-1" />
+                        <div className="space-y-3 w-full">
+                            <h4 className="font-black text-white uppercase tracking-tighter text-sm">Uptime / Availability (IST)</h4>
+                            <div className="space-y-2">
+                                <p className="text-sm text-slate-300 flex justify-between items-center border-b border-white/5 pb-1">
+                                    <span>Mon — Fri</span>
+                                    <span className="font-black text-primary">09:00 - 18:00</span>
+                                </p>
+                                <p className="text-sm text-slate-500 flex justify-between items-center">
+                                    <span>Weekend</span>
+                                    <span className="font-bold italic">Closed / Monitoring</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="mt-6 flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 w-fit border border-white/5">
+                        <ShieldCheck className="h-3 w-3 text-emerald-500" />
+                        <span className="text-[9px] font-black text-slate-500 uppercase tracking-[0.2em]">Encrypted Channel Established</span>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </main>
+
+      {/* Footer Decoration */}
+      <footer className="py-12 text-center border-t border-white/5 bg-black/60 backdrop-blur-xl relative z-10">
+        <p className="text-neutral-600 text-[10px] tracking-[0.4em] uppercase font-black">
+          © 2026 Karan Techno • Comms Protocol V.1
+        </p>
+      </footer>
+    </div>
   );
 }
