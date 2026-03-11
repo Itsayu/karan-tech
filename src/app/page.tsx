@@ -7,7 +7,6 @@ import { ServiceCard } from "@/components/services/ServiceCard";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Star, Quote, Sparkles, MoveDown } from "lucide-react";
 import Image from "next/image";
-import { TestimonialGenerator } from "@/components/TestimonialGenerator";
 
 export default function HomePage() {
   return (
@@ -135,9 +134,7 @@ export default function HomePage() {
 
               <div className="relative">
                 <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full animate-pulse" />
-                <div className="relative">
-                   <TestimonialGenerator />
-                </div>
+
               </div>
             </div>
           </div>
