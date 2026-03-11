@@ -13,7 +13,7 @@ export default function HomePage() {
       
       {/* 1. GLOBAL BACKGROUND IMAGE (The Universe/Tech Background) */}
       <div 
-        className="fixed inset-0 w-full h-full -z-50 bg-cover bg-center bg-no-repeat bg-fixed opacity-60"
+        className="fixed inset-0 w-full h-full -z-50 bg-cover bg-center bg-no-repeat bg-fixed"
         style={{ 
           backgroundImage: `url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop')` 
         }}
@@ -39,7 +39,7 @@ export default function HomePage() {
               <h1 className="text-5xl font-black tracking-tighter text-white sm:text-7xl leading-[1.05]">
                 Empowering <span className="text-primary drop-shadow-[0_0_20px_rgba(var(--primary),0.6)]">Digital</span> Evolution
               </h1>
-              <p className="max-w-xl mx-auto lg:mx-0 text-xl text-muted-foreground leading-relaxed">
+              <p className="max-w-xl mx-auto lg:mx-0 text-xl text-neutral-300 leading-relaxed">
                 Karan Techno delivers high-performance IT solutions. We bridge the gap between complex technology and your business goals.
               </p>
               <div className="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
