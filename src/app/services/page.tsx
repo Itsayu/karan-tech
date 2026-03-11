@@ -2,8 +2,7 @@
 
 import { PageHeader } from '@/components/shared/PageHeader';
 import { services, Service as ServiceType } from '@/data/services';
-import Image from 'next/image';
-import { CheckCircle, ArrowRight, Zap, Layers, MousePointer2 } from 'lucide-react';
+import { CheckCircle, ArrowRight, Layers, MousePointer2 } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -11,7 +10,7 @@ import { Badge } from '@/components/ui/badge';
 export default function ServicesPage() {
   return (
     <div className="relative min-h-screen">
-      {/* 1. GLOBAL BACKGROUND IMAGE (Matches Home/About) */}
+      {/* 1. GLOBAL BACKGROUND */}
       <div 
         className="fixed inset-0 w-full h-full -z-20 bg-cover bg-center bg-no-repeat bg-fixed"
         style={{ 
@@ -49,15 +48,15 @@ export default function ServicesPage() {
               const IconComponent = service.icon;
               const serviceId = service.id.toLowerCase().replace(/[^a-z0-9]+/g, '-');
               
-              // Custom Unsplash IDs for specific services
+              // DEFINED ONLINE IMAGES
               const serviceImages: Record<string, string> = {
-                'web-development': 'https://images.unsplash.com/photo-1498050108023-c5249f4df085',
-                'seo-optimization': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f',
-                'cloud-solutions': 'https://images.unsplash.com/photo-1451187580459-43490279c0fa',
-                'ui-ux-design': 'https://images.unsplash.com/photo-1586717791821-3f44a563eb4c'
+                'web-development': 'https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=2000&auto=format&fit=crop',
+                'seo-optimization': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2000&auto=format&fit=crop',
+                'cloud-solutions': 'https://images.unsplash.com/photo-1558494949-ef010ccdcc32?q=80&w=2000&auto=format&fit=crop',
+                'ui-ux-design': 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=2000&auto=format&fit=crop'
               };
 
-              const imageUrl = serviceImages[service.id] || `https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop`;
+              const imageUrl = serviceImages[service.id] || `https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2000&auto=format&fit=crop`;
 
               return (
                 <section 
@@ -81,7 +80,7 @@ export default function ServicesPage() {
                             </Badge>
                           </div>
 
-                          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter">
+                          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter leading-none">
                             {service.name}
                           </h2>
 
@@ -105,7 +104,7 @@ export default function ServicesPage() {
 
                           <div className="pt-8">
                             <Link href="/contact" passHref>
-                              <Button size="lg" className="rounded-full px-8 font-black uppercase tracking-widest text-xs h-14 group/btn">
+                              <Button size="lg" className="rounded-full px-8 font-black uppercase tracking-widest text-xs h-14 group/btn bg-primary hover:bg-primary/90">
                                 Discuss Requirements 
                                 <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                               </Button>
@@ -114,26 +113,26 @@ export default function ServicesPage() {
                         </div>
                       </div>
 
-                      {/* Image Section */}
-                      <div className="relative min-h-[400px] lg:min-h-full overflow-hidden">
-                        <Image 
+                      {/* FIXED Image Section */}
+                      <div className="relative min-h-[450px] lg:min-h-full overflow-hidden bg-neutral-900">
+                        <img 
                           src={imageUrl} 
                           alt={service.name} 
-                          fill 
-                          className="object-cover transition-transform duration-1000 group-hover:scale-110 grayscale-[0.2] group-hover:grayscale-0"
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale-[0.2] group-hover:grayscale-0"
+                          loading="lazy"
                         />
                         {/* Image Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/60 to-transparent lg:hidden" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/80 via-neutral-950/20 to-transparent lg:hidden" />
                         
                         {/* Floating Interaction Hint */}
-                        <div className="absolute bottom-8 left-8 right-8 p-6 rounded-2xl bg-black/40 backdrop-blur-xl border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 hidden md:block">
+                        <div className="absolute bottom-8 left-8 right-8 p-6 rounded-2xl bg-black/60 backdrop-blur-xl border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 hidden md:block">
                             <div className="flex items-center gap-4">
                                 <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center animate-pulse">
                                     <MousePointer2 className="h-5 w-5 text-white" />
                                 </div>
                                 <div>
                                     <p className="text-white font-bold text-sm">Industry Standard Execution</p>
-                                    <p className="text-neutral-400 text-xs tracking-tight">Karan Techno Proprietary Workflow</p>
+                                    <p className="text-neutral-400 text-xs tracking-tight uppercase">Proprietary Workflow</p>
                                 </div>
                             </div>
                         </div>
@@ -153,7 +152,7 @@ export default function ServicesPage() {
                 <h3 className="text-4xl font-black text-white tracking-tighter">Ready to start your digital journey?</h3>
                 <p className="text-neutral-400 text-lg">Our experts are standing by to transform your vision into a market-leading reality.</p>
                 <Link href="/contact">
-                    <Button size="lg" variant="outline" className="h-16 px-12 rounded-full border-2 text-white font-bold text-lg hover:bg-white/10 transition-all">
+                    <Button size="lg" variant="outline" className="h-16 px-12 rounded-full border-2 text-white font-bold text-lg hover:bg-white/10 transition-all border-white/20">
                         Schedule a Free Strategy Call
                     </Button>
                 </Link>
