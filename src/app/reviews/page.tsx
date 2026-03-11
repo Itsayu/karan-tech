@@ -1,8 +1,9 @@
 "use client";
 
 import { PageHeader } from '@/components/shared/PageHeader';
-import { Star, Quote, User, MessageSquare } from 'lucide-react';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Star, Quote, MessageSquare } from 'lucide-react';
+// Import verified here:
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
 const manualTestimonials = [
@@ -88,9 +89,6 @@ export default function ReviewsPage() {
               <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter uppercase">
                 Success Stories
               </h2>
-              <p className="text-lg text-neutral-400 max-w-2xl mx-auto italic">
-                Strategic partnerships that yielded measurable digital results.
-              </p>
             </div>
             
             <div className="grid md:grid-cols-3 gap-8">
@@ -121,6 +119,7 @@ export default function ReviewsPage() {
                   
                   <CardFooter className="p-8 border-t border-white/5 bg-black/20">
                     <div>
+                      {/* CardTitle is used here, so it MUST be imported above */}
                       <CardTitle className="text-white font-black text-lg tracking-tight">
                         {testimonial.author}
                       </CardTitle>
@@ -136,7 +135,6 @@ export default function ReviewsPage() {
         </div>
       </main>
 
-      {/* Footer Decoration */}
       <footer className="py-12 text-center border-t border-white/5 bg-black/60 backdrop-blur-2xl relative z-10">
         <p className="text-neutral-500 text-xs tracking-[0.3em] uppercase font-bold">
           © 2026 Karan Techno • Social Proof Verified
